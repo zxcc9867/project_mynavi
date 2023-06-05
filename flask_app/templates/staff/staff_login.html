@@ -1,0 +1,27 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- メインコンテンツ領域 -->
+<main>
+	<div class="container">
+		<h1 id="main_title">
+			<!-- ここに ページタイトルを表示する -->
+		</h1>
+		
+
+		<form action="/login_staff" method="post" name="inputForm">
+			<div id="form_area" class="base_pattern">
+				<p>アカウント名<span class="required">（必須）</span>：</p>
+				<p><input name="staff_account" type="text" value="" id="InputTitle"></p>
+
+				<p>パスワード<span class="required">（必須）</span>：</p>
+				<p><input name="staff_password" type="password" value=""></p>
+			</div>
+			<div id="button_area">
+				<input type="submit" class="go_next_button" value="ログイン">
+			</div>
+		</form>
+	</div>
+</main>
+{% endblock %}

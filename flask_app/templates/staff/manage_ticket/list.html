@@ -1,0 +1,109 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_ticket.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      > チケット管理
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <h1 id="main_title">
+      チケット一覧
+    </h1>
+
+    <div id="list_area" class="base_pattern">
+      <div id="output_event_sb">
+        <form method="post" action="{{url_for('staff_manage_ticket')}}">
+          <select id="event_sb" name="eventId" onchange="submit(this.form)">
+            <option value="0">イベントを選択</option>
+            {{ selectbox_option }}
+          </select>
+        </form>
+      </div>
+      <div id="output_list_table">
+        <table border="1">
+          <tr>
+            <th class="event_date">開催日</th>
+            <th class="event_name">イベント名</th>
+            <th class="ticket_seat_name">席種</th>
+            <th class="ticket_price">料金</th>
+            <th class="ticket_accept">受付状態</th>
+            <th class="action_button"></th>
+          </tr>
+          {% for ticket in mst_ticket %}
+          <tr>
+            <form method="post">
+              {% for event in mst_event %}
+              {% if event.event_id == ticket.event_id %}
+              <td class="event_date">{{ event.event_date }}</td>
+              {% endif %}
+              {% endfor %}
+
+              {% for event in mst_event %}
+              {% if event.event_id == ticket.event_id %}
+              <td class="event_name">{{ event.event_name }}</td>
+              <!-- hidden属性の項目 -->
+              <input name="event_id" type="hidden" value="{{ event.event_id }}">
+              {% endif %}
+              {% endfor %}
+
+              {% for seat_param in seat_param_list %}
+              {% if ticket.ticket_seat_id == seat_param.seat_id %}
+              <td class="ticket_seat_name">{{ seat_param.seat_name }}</td>
+              {% endif %}
+              {% endfor %}
+
+              <td class="ticket_price">{{ ticket.ticket_price }}</td>
+
+              <!-- 受付状態は3種しかないのでHTMLに書いてしまう -->
+              <td class="ticket_accept_name">
+                {% if ticket.ticket_accept == 0 %}
+                準備中
+                {% elif ticket.ticket_accept == 1 %}
+                受付中
+                {% elif ticket.ticket_accept == 2 %}
+                受付終了
+                {% endif %}
+              </td>
+
+              <td class="action_button">
+                <div>
+                  <input type="submit" formaction="{{ url_for('input_ticket', mode='update') }}" class="half_button"
+                    value="変更" />
+                  {% if ticket.isDeletable != false %}
+                  <input type="submit" formaction="{{ url_for('confirm_ticket', mode='delete') }}" class="half_button"
+                    value="削除" />
+                  {% endif %}
+                  <!-- hidden属性の項目 -->
+                  <input name="ticket_id" type="hidden" value="{{ ticket.ticket_id }}">
+                  <input name="ticket_seat_id" type="hidden" value="{{ ticket.ticket_seat_id }}">
+                  <input name="ticket_price" type="hidden" value="{{ ticket.ticket_price }}">
+                  <input name="ticket_accept" type="hidden" value="{{ ticket.ticket_accept }}">
+                </div>
+              </td>
+            </form>
+          </tr>
+          {% else %}
+          チケットデータが存在しません。
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div id="button_area">
+      <input type="button" class="go_next_button" value="新規登録"
+        onclick="location.href=`{{url_for('input_ticket', mode='create')}}`">
+    </div>
+  </div>
+</main>
+{% endblock %}

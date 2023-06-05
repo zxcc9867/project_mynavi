@@ -1,0 +1,165 @@
+@charset "UTF-8";
+/* ==================================================
+* サイトの基本デザイン
+* ================================================== */
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo,
+		メイリオ, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+/* --------------------------------------------------
+* 基本設定
+---------- */
+/* コンテナ領域 */
+.container {
+	width: 900px;
+	margin: 0px auto;
+	position: relative;
+}
+
+/* --------------------------------------------------
+* ヘッダー領域
+---------- */
+header {
+	width: 100%;
+	background-color: #e5a323;
+}
+
+/* ロゴ表示領域 */
+header .site_title {
+	height: 90px;
+	width: 200px;
+}
+
+/* ログイン・ログアウトボタン表示領域 */
+header .user_infomation {
+	height: 80px;
+	width: 220px;
+	top: 0;
+	right: 0;
+	position: absolute;
+	padding: 5px;
+	text-align: right;
+	color: white;
+}
+
+header img {
+	max-width: 100%;
+	height: auto;
+	margin-top: 5px;
+}
+
+/* --------------------------------------------------
+* ナビゲーション領域
+---------- */
+nav {
+	width: 100%;
+	padding: 10px 0;
+}
+
+
+/* --------------------------------------------------
+* メインコンテンツ領域
+---------- */
+main {
+	width: 100%;
+	padding-bottom: 40px; /* フッターの長さ分 画面下端に余白を設ける */
+}
+
+main h1 {
+	padding: 20px 0 10px;
+}
+
+main h2 {
+	margin: 10px 0 5px;
+	padding: 0.25em 0.5em;
+	line-height: 1em;
+	border-left: solid 10px #e5a323;
+}
+
+/* --------------------------------------------------
+* フッター領域
+---------- */
+footer {
+	height: 40px;
+	width: 100%;
+	position: fixed;
+	bottom: 0; /* 要素を画面の下端に固定する */
+	background-color: gray;
+}
+
+/* 企業のコピーライト */
+footer p.copyright {
+	padding-top: 5px;
+	text-align: center;
+	color: white;
+}
+
+/* --------------------------------------------------
+* 各種表示エリア
+---------- */
+
+/* 基本パターン  ---------------------------- */
+.base_pattern {
+	margin: 10px auto;
+	padding: 20px;
+	border: solid 1px lightgray;
+	background-color: whitesmoke;
+}
+
+/* 一覧表示領域  ---------------------------- */
+#list_area {
+	/* 基本パターン（classで設定）に加えて、以下を設定 */
+	width: 100%;
+	margin-top: 15px;
+}
+
+#list_area p.data {
+	border: solid 1px black;
+	background: white;
+	padding: 5px;
+	margin: 0 0 8px;
+}
+
+#list_area p.info {
+	border-bottom: solid 2px #eedcb3;
+	border-radius: 2px;
+	background: rgb(213 236 255 / 32%);
+	padding: 5px;
+	margin: 0 0 8px;
+}
+
+/* フォーム表示領域  ---------------------------- */
+#form_area {
+	/* 基本パターン（classで設定）に加えて、以下を設定 */
+	width: 100%;
+}
+
+/* メニュー表示領域  ---------------------------- */
+#menu_button_area {
+	width: 100%;
+	margin: 10px auto;
+}
+
+/* インフォメーションメッセージ表示領域  ---------------------------- */
+#information_msg_area {
+	min-height: 150px; /* 最低限の高さ指定 表示内容によって自動的に広がる*/
+}
+#information_msg_area p {
+	min-height: 200px; /* 最低限の高さ指定 表示内容によって自動的に広がる*/
+	padding: 30px 20px;
+	border: solid 1px lightgray;
+	background-color: white;
+}
+
+/* 確認メッセージ表示領域  ---------------------------- */
+#confirmation_msg_area {
+	min-height: 150px; /* 最低限の高さ指定 表示内容によって自動的に広がる*/
+	margin: 10px 0;
+	padding: 30px 20px;
+	border: double 3px #e5a323;
+	background-color: white;
+}

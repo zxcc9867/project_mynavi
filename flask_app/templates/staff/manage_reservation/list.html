@@ -1,0 +1,113 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_reservation.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+    <div class="container">
+        <p class="menu">
+            <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+            > 予約管理
+        </p>
+    </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+    <div class="container">
+        <h1 id="main_title">
+            予約一覧
+        </h1>
+        
+        <div id="list_area" class="base_pattern">
+            <div id="output_event_category_sb">
+                <form method="post" action="{{url_for('staff_manage_reservation')}}">
+                    <select id="event_category_sb" name="event_category_id" onchange="submit(this.form)">
+                        <option value="0">イベントカテゴリを選択</option>
+                        {{ selectbox_option }}
+                    </select>
+                </form>
+            </div>
+
+            <div id="output_list_table">
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <th class="event_date">開催日</th>
+                            <th class="event_name">イベント名</th>
+                            <th class="ticket_seat_name">席種</th>
+                            <th class="ticket_price">料金</th>
+                            <th class="customer_name">予約者名</th>
+                            <th class="action_button"></th>
+                        </tr>
+                        {% if reservation_param_list %}
+                        {% for reservation in reservation_param_list %}
+                        {% if query %}
+                        {% if query == reservation.event_category_id %}
+                        <form action="{{ url_for('confirm_reservation') }}" method="post">
+                            <tr>
+                                <td class="event_date">{{ reservation.event_date }}</td>
+                                <td class="event_name">{{ reservation.event_name }}</td>
+                                <td class="ticket_seat_name">{{ reservation.ticket_seat_name }}</td>
+                                <td class="ticket_price">{{ reservation.ticket_price }}</td>
+                                <td class="customer_name">{{ reservation.customer_name }}</td>
+                                <td class="action_button">
+                                    <input type="submit" class="full_button" value="キャンセル" />
+                                    <!-- hidden属性の項目 -->
+                                    <input name="reservation_id" type="hidden" value="{{ reservation.reservation_id }}">
+                                    <input name="event_name" type="hidden" value="{{ reservation.event_name }}">
+                                    <input name="event_category_name" type="hidden"
+                                        value="{{ reservation.event_category_name }}">
+                                    <input name="event_date" type="hidden" value="{{ reservation.event_date }}">
+                                    <input name="event_place" type="hidden" value="{{ reservation.event_place }}">
+                                    <input name="event_overview" type="hidden" value="{{ reservation.event_overview }}">
+                                    <input name="ticket_seat_name" type="hidden"
+                                        value="{{ reservation.ticket_seat_name }}">
+                                    <input name="ticket_price" type="hidden" value="{{ reservation.ticket_price }}">
+
+                                </td>
+                            </tr>
+                        </form>
+                        {% endif %}
+
+                        {% else %}
+                        <form action="{{ url_for('confirm_reservation') }}" method="post">
+                            <tr>
+                                <td class="event_date">{{ reservation.event_date }}</td>
+                                <td class="event_name">{{ reservation.event_name }}</td>
+                                <td class="ticket_seat_name">{{ reservation.ticket_seat_name }}</td>
+                                <td class="ticket_price">{{ reservation.ticket_price }}</td>
+                                <td class="customer_name">{{ reservation.customer_name }}</td>
+                                <td class="action_button">
+                                    <input type="submit" class="full_button" value="キャンセル" />
+                                    <!-- hidden属性の項目 -->
+                                    <input name="reservation_id" type="hidden" value="{{ reservation.reservation_id }}">
+                                    <input name="event_name" type="hidden" value="{{ reservation.event_name }}">
+                                    <input name="event_category_name" type="hidden"
+                                        value="{{ reservation.event_category_name }}">
+                                    <input name="event_date" type="hidden" value="{{ reservation.event_date }}">
+                                    <input name="event_place" type="hidden" value="{{ reservation.event_place }}">
+                                    <input name="event_overview" type="hidden" value="{{ reservation.event_overview }}">
+                                    <input name="ticket_seat_name" type="hidden"
+                                        value="{{ reservation.ticket_seat_name }}">
+                                    <input name="ticket_price" type="hidden" value="{{ reservation.ticket_price }}">
+
+                                </td>
+                            </tr>
+                        </form>
+
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        予約情報が存在しません。
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      >
+      <a href="{{ url_for('staff_manage_customer') }}">会員管理</a>
+      {% if mode == 'create' %}
+      > 新規登録
+      {% elif mode == 'update' %}
+      > 変更内容入力
+      {% endif %}
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <h1 id="main_title">
+      <!-- ここに ページタイトルを表示する -->
+    </h1>
+    <h2 id="main_sub_title">会員情報</h2>
+
+    <form name="inputForm" method="post">
+      <div id="form_area" class="base_pattern">
+        <p>アカウント名：</p>
+        <p><input name="customer_account" type="text" value="{{ customer_account }}" readonly="readonly"></p>
+
+        <p>パスワード<span class="required">（必須）</span>：</p>
+        <p><input name="customer_password" type="password" value="{{ customer_password }}"></p>
+
+        <p>会員名<span class="required">（必須）</span>：</p>
+        <p><input name="customer_name" type="text" value="{{ customer_name }}"></p>
+
+        <p>郵便番号</p>
+        <p><input name="customer_zipcode" type="tel" value="{{ customer_zipcode }}"></p>
+
+        <p>住所</p>
+        <p><input name="customer_address" type="text" value="{{ customer_address }}"></p>
+
+        <p>電話番号：</p>
+        <p><input name="customer_phone" type="tel" value="{{ customer_phone }}"></p>
+
+        <p>支払方法：</p>
+        <p class="radioButton">
+          {% if customer_payment == '0' %}
+          <input type="radio" name="customer_payment" value="1">
+          クレジットカード &nbsp;&nbsp;
+          <input type="radio" name="customer_payment" value="2">
+          キャッシュレス決済 &nbsp;&nbsp;
+          <input type="radio" name="customer_payment" value="0" checked="checked">
+          未選択
+          {% elif customer_payment == '1' %}
+          <input type="radio" name="customer_payment" value="1" checked="checked">
+          クレジットカード &nbsp;&nbsp;
+          <input type="radio" name="customer_payment" value="2">
+          キャッシュレス決済 &nbsp;&nbsp;
+          <input type="radio" name="customer_payment" value="0">
+          未選択
+          {% elif customer_payment == '2' %}
+          <input type="radio" name="customer_payment" value="1">
+          クレジットカード &nbsp;&nbsp;
+          <input type="radio" name="customer_payment" value="2" checked="checked">
+          キャッシュレス決済 &nbsp;&nbsp;
+          <input type="radio" name="customer_payment" value="0">
+          未選択
+          {% endif %}
+        </p>
+        <!-- hidden属性の項目 -->
+        <input name="customer_id" type="hidden" value="{{ customer_id }}">
+      </div>
+
+      <div id="button_area">
+        <input type="button" class="other_button" value="一覧画面へ戻る"
+          onclick="location.href=`{{ url_for('staff_manage_customer') }}`">
+        <input type="submit" formaction="{{ url_for('confirm_customer', mode=mode) }}" class="go_next_button"
+          value="確認画面へ">
+      </div>
+    </form>
+  </div>
+</main>
+
+{% endblock %}

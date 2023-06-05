@@ -1,0 +1,14 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+<ul class="list-group list-group-flush"></ul>
+
+<p>
+    <input type="button" class="menu_button" value="スタッフ画面"
+        onclick="window.location.href=`{{url_for('staff_staff_login')}}`">
+</p>
+<p>
+    <input type="button" class="menu_button" value="会員画面" onclick="alert('未実装')">
+</p>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="./staff_reservation.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+    <div class="container">
+        <p class="menu">
+            <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+            > <a href="{{ url_for('staff_manage_reservation') }}">予約管理</a>
+            > 削除内容確認
+
+        </p>
+    </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+    <div class="container">
+        <form method="post">
+            <h1 id="main_title">
+                削除内容確認
+            </h1>
+            <h2 id="main_sub_title">予約情報</h2>
+            
+            <div id="list_area" class="base_pattern">
+                <p>イベント名：</p>
+                <p id="event_name" class="info">
+                    {{ reservation_detail.event_name }}
+                </p>
+
+                <p>カテゴリ：</p>
+                <p id="event_category_name" class="info">
+                    {{ reservation_detail.event_category_name }}
+                </p>
+
+                <p>開催日：</p>
+                <p id="event_date" class="info">
+                    {{ reservation_detail.event_date }}
+                </p>
+
+                <p>開催場所：</p>
+                <p id="event_place" class="info">
+                    {{ reservation_detail.event_place }}
+                </p>
+
+                <p>イベント概要：</p>
+                <p id="event_overview" class="info">
+                    {{ reservation_detail.event_overview }}
+                </p>
+
+                <p>席種</p>
+                <p id="ticket_seat_name" class="info">
+                    {{ reservation_detail.ticket_seat_name }}
+                </p>
+
+                <p>料金：</p>
+                <p id="ticket_price" class="info">
+                    {{ reservation_detail.ticket_price }}
+                </p>
+            </div>
+            <div id="button_area">
+                <input type="button" class="other_button" value="一覧画面へ戻る"
+                    onClick="location.href=`{{url_for('staff_manage_reservation')}}`">
+                <input type="submit" formaction="{{ url_for('accept_reservation', mode='delete') }}" class="go_next_button" id="delete_button" value="削除">
+                <!-- hidden属性の項目 -->
+                <input name="reservation_id" type="hidden" value="{{ reservation_detail.reservation_id }}">
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "layout_staff.html" %}
+{% block body %}
+
+  <!-- 機能共用 CSS -->
+  <link rel="stylesheet" href="/static/css/staff/staff_ticket.css">
+  <!-- ナビゲーション領域 -->
+  <nav>
+    <div class="container">
+      <p class="menu">
+        <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+        >
+        <a href="{{ url_for('staff_manage_ticket') }}">チケット管理</a>
+        {% if mode == 'create' %}
+          > 登録内容確認
+        {% elif mode == 'update' %}
+          > 変更内容確認
+        {% elif mode == 'delete' %}
+          > 削除内容確認
+        {% endif %}
+      </p>
+    </div>
+  </nav>
+
+  <!-- メインコンテンツ領域 -->
+  <main>
+    <div class="container">
+      <h1 id="main_title">
+        <!-- ここに ページタイトルを表示する -->
+      </h1>
+      <h2 id="main_sub_title">チケット情報</h2>
+
+      <form id="inputForm">
+        <div id="form_area" class="base_pattern">
+
+          <p>イベント名<span class="required">（必須）</span>：</p>
+          <p id="output_event_sb">
+            <select id="event_sb" name="event_id" class="info" form="inputForm" required="required">
+              {% for event in event_param_list %}
+                <option value="{{ event.event_id }}" {{ event.status }}>{{ event.event_name }}</option>
+              {% endfor %}
+            </select>
+          </p>
+
+          <p>席種<span class="required">（必須）</span>：</p>
+          <p id="output_ticket_seat_sb">
+            <select id="ticket_seat_sb" name="ticket_seat_id" class="info" form="inputForm">
+              {% for seat_param in seat_param_list %}
+                <option value="{{ seat_param.seat_id }}" {{ seat_param.status }}>{{seat_param.seat_name}}</option>
+              {% endfor %}
+            </select>
+          </p>
+          <p>料金<span class="required">（必須）</span>：</p>
+          <p><input name="ticket_price" class="info" type="text" value="{{ ticket_price }}" readonly="readonly"></p>
+
+          <p>受付状態<span class="required">（必須）</span>：</p>
+          <p class="radioButton">
+            {% if ticket_accept == '0' %}
+              <input type="radio" name="ticket_accept" value="0" checked="checked">
+              準備中 &nbsp;&nbsp;
+              <input type="radio" name="ticket_accept" value="1" disabled="disabled">
+              受付中 &nbsp;&nbsp;
+              <input type="radio" name="ticket_accept" value="2" disabled="disabled">
+              受付終了
+            {% elif ticket_accept == '1' %}
+              <input type="radio" name="ticket_accept" value="0" disabled="disabled">
+              準備中 &nbsp;&nbsp;
+              <input type="radio" name="ticket_accept" value="1" checked="checked">
+              受付中 &nbsp;&nbsp;
+              <input type="radio" name="ticket_accept" value="2" disabled="disabled">
+              受付終了
+            {% elif ticket_accept == '2' %}
+              <input type="radio" name="ticket_accept" value="0" disabled="disabled">
+              準備中 &nbsp;&nbsp;
+              <input type="radio" name="ticket_accept" value="1" disabled="disabled">
+              受付中 &nbsp;&nbsp;
+              <input type="radio" name="ticket_accept" value="2" checked="checked">
+              受付終了
+            {% endif %}
+          </p>
+          <!-- hidden属性の項目 -->
+          <input name="ticket_id" type="hidden" value="{{ ticket_id }}">
+        </div>
+        <div id="button_area">
+          {% if mode == 'delete' %}
+            <input type="button" class="other_button" value="一覧画面へ戻る" onclick="location.href=`{{url_for('staff_manage_ticket')}}`">
+          {% else %}
+            <input type="submit" formaction="{{ url_for('input_ticket', mode=mode) }}" class="other_button" value="入力画面へ戻る">
+          {% endif %}
+          <input type="submit" formaction="{{ url_for('accept_ticket', mode=mode) }}" formmethod="post" class="go_next_button" value="確定">
+        </div>
+      </form>
+    </div>
+  </main>
+{% endblock %}

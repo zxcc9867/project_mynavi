@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ムジクロチケット管理ページ</title>
+
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery3.2.1.slim.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+	</script>
+
+	<!-- サイト共用 CSS -->
+	<link rel="stylesheet" href="/static/css/common/base.css">
+	<link rel="stylesheet" href="/static/css/common/button.css">
+	<link rel="stylesheet" href="/static/css/common/form.css">
+	<link rel="stylesheet" href="/static/css/common/list.css">
+	<link rel="stylesheet" href="/static/css/common/table.css">
+</head>
+
+<body>
+	<!-- ヘッダー領域 -->
+	<header>
+		<div class="container">
+			<div class="site_title">
+				<a href="{{url_for('staff_staff_top')}}"><img src="/static/images/logo_staff.png" alt="ムジクロチケット"></a>
+			</div>
+			<div class="user_infomation">
+				<p>
+					{% if not session.logged_in_staff %}
+					ゲストさん
+					{% elif session.logged_in_staff_account %}
+					{{ session.logged_in_staff_name }}さん
+					{% endif %}
+				</p>
+				<p>
+					{% if session.logged_in_staff %}
+					<input id="logout_button" type="button" value="ログアウト"
+						onClick="location.href=`{{url_for('logout_staff')}}`">
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</header>
+
+	<!-- flashメッセージ表示 -->
+	{% for message in get_flashed_messages() %}
+	<div class="alert alert-info" role="alert">
+		{{ message }}
+	</div>
+	{% endfor %}
+
+	<!-- メインコンテンツ領域 -->
+	<div class="mujiclo-staff-body">
+		{% block body %}{% endblock %}
+	</div>
+
+	<!-- フッター領域 -->
+	<footer>
+		<div class="container">
+			<p class="copyright"><small>© MUJIQLO ENTERTAINMENT INC.</small></p>
+		</div>
+	</footer>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* ==================================================
+* 機能共用デザイン
+* ================================================== */
+
+/* 一覧画面の列幅の設定
+* 以下の列幅の合計を 750px にする。
+* ただし、ボタン用の列として110pxが別途確保（サイト共用のCSS table.cssを参照）
+* されているため、実際のテーブルの列幅は 860pxであるので注意。
+*/
+#list_area .event_date {
+	width: 120px;
+}
+
+#list_area .event_name {
+	width: 300px;
+}
+
+#list_area .ticket_seat_name {
+	width: 90px;
+}
+
+#list_area .ticket_price {
+	width: 90px;
+}
+
+#list_area .customer_name {
+	width: 150px;
+}

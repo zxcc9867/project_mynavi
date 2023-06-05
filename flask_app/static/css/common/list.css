@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* ==================================================
+* リストに関する共通デザイン
+* ================================================== */
+
+ul,
+ol {
+	padding-left: 20px;
+}
+
+/* 一覧画面の列幅の設定
+* 以下の列幅の合計を 750px にする。
+* ただし、ボタン用の列として110pxが別途確保（サイト共用のCSS table.cssを参照）
+* されているため、実際のテーブルの列幅は 860pxであるので注意。
+*/
+#list_area .event_date {
+	width: 120px;
+}
+
+#list_area .event_category_name {
+	width: 170px;
+}
+
+#list_area .event_name {
+	width: 260px;
+}
+
+#list_area .event_place {
+	width: 200px;
+}
+
+/* アイキャッチ画像 */
+.featuredImage {
+	margin: 30px 0;
+}

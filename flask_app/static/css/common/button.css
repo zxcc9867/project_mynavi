@@ -1,0 +1,136 @@
+@charset "UTF-8";
+/* ==================================================
+* ボタンに関する共通デザイン
+* ================================================== */
+
+/* --------------------------------------------------
+* 基本デザイン
+---------- */
+/* ty */
+input[type="button"] {
+	padding: 5px;
+	margin-bottom: 5px;
+	border: none;
+	border-radius: 3px;
+	background-color: #dcdcdc;
+	display: inline-block;
+}
+
+/* マウスオーバー時（マウスポインタが乗ったとき） */
+input[type="button"]:hover {
+	color: white;
+	background-color: #4e454a;
+}
+
+input[type="submit"] {
+	padding: 5px;
+	margin-bottom: 5px;
+	border: none;
+	border-radius: 3px;
+	background-color: #dcdcdc;
+	display: inline-block;
+}
+
+/* マウスオーバー時（マウスポインタが乗ったとき） */
+input[type="submit"]:hover {
+	color: white;
+	background-color: #4e454a;
+}
+
+/* --------------------------------------------------
+* 個別設定
+---------- */
+
+/* ログインボタン */
+#login_button {
+	width: 100px;
+}
+#login_button:hover {
+	background-color: #ed6d35;
+}
+
+/* ログアウトボタン */
+#logout_button {
+	width: 100px;
+}
+#logout_button:hover {
+	background-color: #ed6d35;
+}
+
+/* マイページボタン */
+#mypage_button {
+	width: 100px;
+}
+
+/* メニューボタン */
+#menu_button_area .menu_button {
+	width: 300px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+/* 登録、確認などの 次の画面へ進むボタン */
+#button_area .go_next_button {
+	width: 350px;
+	background-color: #ff8c00;
+}
+#button_area .go_next_button:hover {
+	color: white;
+	background-color: #ed6d35;
+}
+
+/* その他のボタン */
+#button_area .other_button {
+	width: 250px;
+}
+
+/* 一覧表示内のボタン １セルに２個表示する場合 */
+#list_area .action_button .half_button {
+	width: 45px;
+	padding: 2px 5px;
+	margin: 2px;
+}
+
+/* 一覧表示内のボタン １セルに１個表示する場合 */
+#list_area .action_button .full_button {
+	width: 94px;
+	padding: 2px 5px;
+	margin: 2px;
+}
+
+/* --------------------------------------------------
+* ボタン表示・非表示設定
+---------- */
+
+/* ヘッダー領域  ---------------------------- */
+
+/* ログインボタン */
+/* #login_button {
+	display: none;
+} */
+
+/* メインコンテンツ領域  ---------------------------- */
+
+/* 確定ボタン */
+#conf_button {
+	/* JSで表示するまでは、非表示 */
+	/* display: none; */
+}
+
+/* 削除ボタン */
+#delete_button {
+	/* display: none;  */
+	/* JSで表示するまでは、非表示 */
+}
+
+/* 入力画面へ戻るボタン */
+#go_input_button {
+	/* display: none;  */
+	/* JSで表示するまでは、非表示 */
+}
+
+/* 一覧画面へ戻る画面へ戻るボタン */
+#go_list_button {
+	/* display: none;  */
+	/* JSで表示するまでは、非表示 */
+}

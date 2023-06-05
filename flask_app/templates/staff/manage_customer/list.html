@@ -1,0 +1,74 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      > 会員管理
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <h1 id="main_title">
+      会員一覧
+    </h1>
+
+    <div id="list_area" class="base_pattern">
+      <div id="output_list_table">
+        <!-- ここに一覧表を表示する -->
+        <table border="1">
+          <tbody>
+            <tr>
+              <th class="customer_account">アカウント名</th>
+              <th class="customer_name">会員名</th>
+              <th class="action_button"></th>
+            </tr>
+            {% for customer in mst_customer %}
+            <tr>
+              <form method="post">
+                <td class="customer_account">{{ customer.customer_account }}</td>
+                <td class="customer_name">{{ customer.customer_name }}</td>
+
+                <!-- hidden属性の項目 -->
+                <input name="customer_id" type="hidden" value="{{ customer.customer_id }}">
+                <!-- XXX: passwordをhtml上に記述するのは良くないが研修用プログラムだしまあいいかという気持ち -->
+                <input name="customer_password" type="hidden" value="{{ customer.customer_password }}">
+                <input name="customer_account" type="hidden" value="{{ customer.customer_account }}">
+                <input name="customer_name" type="hidden" value="{{ customer.customer_name }}">
+                <input name="customer_zipcode" type="hidden" value="{{ customer.customer_zipcode }}">
+                <input name="customer_address" type="hidden" value="{{ customer.customer_address }}">
+                <input name="customer_phone" type="hidden" value="{{ customer.customer_phone }}">
+                <input name="customer_payment" type="hidden" value="{{ customer.customer_payment }}">
+
+                <td class="action_button">
+                  <div>
+                    <input type="submit" formaction="{{ url_for('input_customer', mode='update') }}" class="half_button"
+                      value="変更" />
+                    {% if customer.isDeletable != false %}
+                    <input type="submit" formaction="{{ url_for('confirm_customer', mode='delete') }}"
+                      class="half_button" value="削除" />
+                    {% endif %}
+                  </div>
+                </td>
+              </form>
+            </tr>
+            {% else %}
+            ユーザーデータが存在しません。
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="button_area"></div>
+  </div>
+</main>
+{% endblock %}

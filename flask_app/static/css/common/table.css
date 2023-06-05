@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/* ==================================================
+* テーブルに関する共通デザイン
+* ================================================== */
+
+/* 以下は一覧画面用のテーブル設定なので、全てリストエリア内が前提である */
+
+#list_area table {
+	border-collapse: collapse;
+	background-color: white;
+	border: solid 1px black;
+	table-layout: fixed;
+	word-break: break-all;
+}
+
+#list_area th {
+	background-color: #eedcb3;
+}
+
+#list_area th,
+td {
+	padding: 2px 5px;
+}
+
+/* ボタンを表示する列 */
+#list_area .action_button {
+	width: 110px;
+	text-align: left;
+}
+
+#list_area .action_button div {
+	display: flex;
+	justify-content: space-between;
+    flex-direction: row;
+}
+
+/* --------------------------------------------------
+* セル内の値の位置
+---------- */
+
+/* 会員情報 */
+#list_area td.customer_account {
+	text-align: left;
+}
+
+#list_area td.customer_name {
+	text-align: left;
+}
+
+/* イベントカテゴリ */
+#list_area td.event_category_name {
+	text-align: left;
+}
+
+/* イベント情報 */
+#list_area td.event_date {
+	text-align: center;
+}
+
+#list_area td.event_name {
+	text-align: left;
+}
+
+#list_area td.event_place {
+	text-align: left;
+}
+
+/* チケット */
+#list_area td.ticket_seat_name {
+	text-align: center;
+}
+
+#list_area td.ticket_price {
+	text-align: right;
+}
+
+#list_area td.ticket_accept {
+	text-align: center;
+}

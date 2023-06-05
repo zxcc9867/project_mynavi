@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/* ==================================================
+* 入力フォームに関する共通デザイン
+* ================================================== */
+#form_area p {
+	width: 100%;
+}
+
+#form_area p.radioButton {
+	padding: 7px 5px 15px;
+}
+
+#form_area span.required {
+	color: #ff8c00;
+	font-weight: bold;
+}
+
+#form_area input[type="text"],
+#form_area input[type="password"],
+#form_area select,
+#form_area textarea {
+	width: 100%;
+}
+
+#form_area input.info, select.info, textarea.info {
+	border: none;
+	border-bottom: solid 2px #eedcb3;
+	border-radius: 2px;
+	background: rgb(213 236 255 / 32%);
+	padding: 5px;
+	margin: 0 0 8px;
+}
+
+input,
+select,
+textarea {
+	font-size: 100%;
+	line-height: 1.5em;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+textarea {
+	height: 7em;
+}
+
+input[readonly] {
+	background-color: #ddddddda
+  }
