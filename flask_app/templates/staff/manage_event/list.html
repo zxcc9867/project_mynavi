@@ -1,0 +1,66 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      > イベント一覧
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <div style="display: flex;">
+        <h1 id="main_title">
+            イベント一覧
+        </h1>
+        <div style="margin-top: 25px; margin-left: auto;">
+            <input type="submit" formaction="/" class="primary_button"
+            value="新規作成">
+        </div>
+    </div>
+
+    <div id="list_area" class="base_pattern">
+      <div id="output_list_table">
+        <!-- ここに一覧表を表示する -->
+        <table border="1">
+          <tbody>
+            <tr>
+              <th class="">イベント名</th>
+              <th class="">開催日</th>
+              <th class="">開催場所</th>
+              <th class="action_button"></th>
+            </tr>
+            <tr>
+              <form method="post">
+                <td class=""></td>
+                <td class=""></td>
+                <td class=""></td>
+
+
+                <td class="action_button">
+                  <div>
+                    <input type="submit" formaction="/" class="half_button"
+                      value="変更" />
+                    <input type="submit" formaction="/"
+                      class="half_button" value="削除" />
+                  </div>
+                </td>
+              </form>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="button_area"></div>
+  </div>
+</main>
+{% endblock %}
