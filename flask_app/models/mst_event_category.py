@@ -5,8 +5,8 @@ from flask_app.database import db
 class Mst_event_category(db.Model):
     __tablename__ = "mst_event_category"
     event_category_id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
-    event_category_name = db.Column(db.String(20))
-
+    event_category_name = db.Column(db.String(20)) 
+    
     def __init__(
         self,
         event_category_id=None,
