@@ -24,6 +24,15 @@ def show_event_list():
 def show_event_new():
     return render_template('/staff/manage_event/input.html')
 
+@app.route("/show_event_new/confirm", methods=['GET','POST'])
+@is_staff_login
+def confirm_event_new():
+    event_name = request.form.get('event_name')
+    event_place = request.form.get('event_place')
+    event_date = request.form.get('event_date')
+    overview = request.form.get('overview')
+    return render_template('confirm.html', event_name=event_name, event_place=event_place, event_date=event_date, overview=overview)
+
 @app.route("/show_event_edit/<int:event_id>", methods=['GET'])
 @is_staff_login
 def show_event_edit(event_id):
