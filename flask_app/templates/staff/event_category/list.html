@@ -24,7 +24,7 @@
 
     <div id="list_area" class="base_pattern">
       <div id="output_list_table">
-        <!-- ここに一覧表を表示する -->
+        <!-- ここに一覧表を表示する --> {#여기에 데이터베이스 내용 표시#}
         <table border="1">
           <tbody>
             <tr>
@@ -34,7 +34,7 @@
             {% for event_category in mst_category %}
             <tr>
               <form method="post">
-                <td class="category_name">{{event_category.event_category_name}}</td>
+                <td class="event_category_name">{{event_category.event_category_name}}</td>
 
                 <!-- hidden属性の項目 -->
                 <input name="event_category_id" type="hidden" value="{{event_category.event_category_id }}">
