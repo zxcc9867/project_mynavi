@@ -23,8 +23,7 @@
             イベント一覧
         </h1>
         <div style="margin-top: 25px; margin-left: auto;">
-            <input type="submit" formaction="/" class="primary_button"
-            value="新規作成">
+            <a type="submit" href="{{url_for('show_event_new')}}" class="btn btn-primary">新規作成</a>
         </div>
     </div>
 
@@ -39,23 +38,24 @@
               <th class="">開催場所</th>
               <th class="action_button"></th>
             </tr>
+            {% for event in events%}
             <tr>
               <form method="post">
-                <td class=""></td>
-                <td class=""></td>
-                <td class=""></td>
+                <td class="">{{event.event_name}}</td>
+                <td class="">{{event.event_date}}</td>
+                <td class="">{{event.event_place}}</td>
 
 
                 <td class="action_button">
                   <div>
-                    <input type="submit" formaction="/" class="half_button"
-                      value="変更" />
+                    <a href="{{url_for('show_event_edit', event_id=event.id)}}" class="btn btn-secondary">変更</a>
                     <input type="submit" formaction="/"
                       class="half_button" value="削除" />
                   </div>
                 </td>
               </form>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
