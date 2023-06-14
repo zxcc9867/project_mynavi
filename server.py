@@ -7,6 +7,8 @@ import flask_app.views.staff.staff_customer
 import flask_app.views.staff.staff_login
 import flask_app.views.staff.staff_reservation
 import flask_app.views.staff.staff_ticket
+import flask_app.views.staff.event_category  #############################
+
 
 app.secret_key = 'hoge'
 

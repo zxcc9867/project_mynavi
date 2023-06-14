@@ -1,0 +1,51 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      >
+      <a href="{{ url_for('staff_event_category') }}">会員管理</a>
+      {% if mode == 'create' %}
+      > 新規登録
+      {% elif mode == 'update' %}
+      > 変更内容入力
+      {% endif %}
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <h1 id="main_title">
+      <!-- ここに ページタイトルを表示する -->
+    </h1>
+    <h2 id="main_sub_title">イベントカテゴリ情報</h2>
+
+    <form name="inputForm" method="post">
+      <div id="form_area" class="base_pattern">
+        <p>イベントカテゴリ名</p>
+        <p><input name="event_category_name" type="text" value="{{ event_category_name }}" readonly="readonly"></p>
+
+        <!-- hidden属性の項目 -->
+        <input name="category_id" type="hidden" value="{{ category_id }}">
+      </div>
+
+      <div id="button_area">
+        <input type="button" class="other_button" value="一覧画面へ戻る"
+          onclick="location.href=`{{ url_for('staff_event_category) }}`">
+        <input type="submit" formaction="{{ url_for('confirm_event_category', mode=mode) }}" class="go_next_button"
+          value="確認画面へ">
+      </div>
+    </form>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      >
+      <a href="{{ url_for('staff_event_category') }}">イベントカテゴリ管理</a>
+      {% if mode == 'create' %}
+      > 登録内容確認
+      {% elif mode == 'update' %}
+      > 変更内容確認
+      {% elif mode == 'delete' %}
+      > 削除内容確認
+      {% endif %}
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <h1 id="main_title">
+      <!-- ここに ページタイトルを表示する -->
+    </h1>
+    <h2 id="main_sub_title">イベントカテゴリ情報</h2>
+
+    <form name="inputForm" method="post">
+      <div id="form_area" class="base_pattern">
+        <p>イベントカテゴリ名<span class="required">（必須）</span>：</p>
+        <p><input name="category_name" class="info" type="text" value="{{ category_name }}" readonly="readonly">
+        </p>
+
+        <!-- hidden属性の項目 -->
+        <input name="category_id type="hidden" value="{{ event_category_id }}">
+      </div>
+
+      <div id="button_area">
+        {% if mode == 'delete' %}
+        <input type="button" class="other_button" value="一覧画面へ戻る"
+          onclick="location.href=`{{url_for('staff_event_category')}}`">
+        {% else %}
+        <input type="submit" formaction="{{ url_for('input_event_category', mode=mode) }}" class="other_button"
+          value="入力画面へ戻る">
+        {% endif %}
+        <input type="submit" formaction="{{ url_for('accept_event_category', mode=mode) }}" class="go_next_button" value="確定">
+      </div>
+    </form>
+  </div>
+</main>
+
+{% endblock %}

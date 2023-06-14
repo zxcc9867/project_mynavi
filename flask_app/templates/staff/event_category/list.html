@@ -1,0 +1,64 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      > イベントカテゴリ管理
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <h1 id="main_title">
+      イベントカテゴリ一覧
+    </h1>
+
+    <div id="list_area" class="base_pattern">
+      <div id="output_list_table">
+        <!-- ここに一覧表を表示する -->
+        <table border="1">
+          <tbody>
+            <tr>
+              <th class="category_name">イベントカテゴリ名</th>
+              <th class="action_button"></th>
+            </tr>
+            {% for event_category in mst_category %}
+            <tr>
+              <form method="post">
+                <td class="category_name">{{event_category.event_category_name}}</td>
+
+                <!-- hidden属性の項目 -->
+                <input name="event_category_id" type="hidden" value="{{event_category.event_category_id }}">
+                
+                <td class="action_button">
+                  <div>
+                    <input type="submit" formaction="{{ url_for('update', mode='update') }}" class="half_button"
+                      value="変更" />
+                    {% if event_category.isDeletable != false %}
+                    <input type="submit" formaction="{{ url_for('delete', mode='delete') }}"
+                      class="half_button" value="削除" />
+                    {% endif %}
+                  </div>
+                </td>
+              </form>
+            </tr>
+            {% else %}
+            ユーザーデータが存在しません。
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="button_area"></div>
+  </div>
+</main>
+{% endblock %}
