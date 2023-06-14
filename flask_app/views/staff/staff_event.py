@@ -30,3 +30,4 @@ def show_event_edit(event_id):
     event = read_event_one(event_id)
     return render_template('/staff/manage_event/edit.html', event=event)
 
+
