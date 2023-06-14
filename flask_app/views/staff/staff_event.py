@@ -10,10 +10,23 @@ from flask_app.views.staff.common.staff_common import is_staff_login
 @app.route("/show_event_list", methods=['GET','POST'])
 @is_staff_login
 def show_event_list():
-    return render_template('/staff/manage_event/list.html')
+    events = read_event()
+    return render_template('/staff/manage_event/list.html', events=events)
 
-@app.route("/staff_manage_event/detail/<int:staff_id>", methods=['GET'])
+# @app.route("/staff_manage_event/detail/<int:staff_id>", methods=['GET'])
+# @is_staff_login
+# def show_event_detail(staff_id):
+#     staff = read_event_one(staff_id)
+#     return render_template('detail.html', id=staff.id)
+
+@app.route("/show_event_new", methods=['GET'])
 @is_staff_login
-def show_event_detail(staff_id):
-    staff = read_event_one(staff_id)
-    return render_template('', id=staff_id)
+def show_event_new():
+    return render_template('/staff/manage_event/input.html')
+
+@app.route("/show_event_edit/<int:event_id>", methods=['GET'])
+@is_staff_login
+def show_event_edit(event_id):
+    event = read_event_one(event_id)
+    return render_template('/staff/manage_event/edit.html', event=event)
+
