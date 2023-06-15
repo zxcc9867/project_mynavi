@@ -10,7 +10,9 @@
 
     <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-primary">編集</a>
     <a href="{{url_for('show_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
-    <button>削除</button>
+    {% if event.isDeletable != false %}
+    <a href="{{url_for('delete_event_list', event_id=event.event_id)}}" class="btn btn-danger">削除</a>
+    {% endif %}
 
 
 {% endblock %}
