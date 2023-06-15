@@ -32,14 +32,14 @@
         <!-- ここに一覧表を表示する -->
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab">開催予定/開催中</a>
+            <a class="nav-link active" data-bs-toggle="tab" href="#events_yet">開催予定/開催中</a>
           </li>
           <li>
-            <a class="nav-link" data-bs-toggle="tab">開催済</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#events_done">開催済</a>
           </li>
         </ul>
         <div class="tab-content">
-          <div id="" class="tab-pane active">
+          <div id="events_yet" class="tab-pane active">
             <table border="1">
               <tbody>
                 <tr>
@@ -48,29 +48,30 @@
                   <th class="">開催場所</th>
                   <th class="action_button"></th>
                 </tr>
-                {% for event in events%}
-                <tr>
-                  <form method="post">
-                    <td class=""><a href="{{url_for('show_event_detail', event_id=event.event_id)}}">{{event.event_name}}</a></td>
-                    <td class="">{{event.event_date}}</td>
-                    <td class="">{{event.event_place}}</td>
-                    <td class="action_button">
-                      <div>
-                        <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-secondary">変更</a>
-                        {% if event.isDeletable != false %}
-                        <a href="{{url_for('delete_event_list', event_id=event.event_id)}}" class="btn btn-danger">削除</a>
-                        {% endif %}
-                      </div>
-                    </td>
-                  </form>
-                </tr>
-                {% else %}
-                イベントデータが存在しません。
-                {% endfor %}
+                  {% for event in events_yet %}
+                  <tr>
+                    <form method="post">
+                      <td class=""><a href="{{url_for('show_event_detail', event_id=event.event_id)}}">{{event.event_name}}</a></td>
+                      <td class="">{{event.event_date}}</td>
+                      <td class="">{{event.event_place}}</td>
+                      <td class="action_button">
+                        <div>
+                          <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-secondary">変更</a>
+                          {% if event.isDeletable != false %}
+                          <a href="{{url_for('delete_event_list', event_id=event.event_id)}}" class="btn btn-danger">削除</a>
+                          {% endif %}
+                        </div>
+                      </td>
+                    </form>
+                  </tr>
+                  {% else %}
+                  イベントデータが存在しません。
+                  {% endfor %}
+                
               </tbody>
             </table>
           </div>
-          <div id="" class="tab-pane">
+          <div id="events_done" class="tab-pane">
             <table border="1">
               <tbody>
                 <tr>
@@ -79,7 +80,7 @@
                   <th class="">開催場所</th>
                   <th class="action_button"></th>
                 </tr>
-                {% for event in events %}
+                  {% for event in events_done %}
                 <tr>
                   <form method="post">
                     <td class=""><a href="{{url_for('show_event_detail', event_id=event.event_id)}}">{{event.event_name}}</a></td>
@@ -99,6 +100,7 @@
                 {% else %}
                 イベントデータが存在しません。
                 {% endfor %}
+                
               </tbody>
             </table>
           </div>
