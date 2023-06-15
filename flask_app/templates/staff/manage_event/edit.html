@@ -2,13 +2,15 @@
 
 {% block body %}
 
-{# イベントの登録フォーム #}
 <div class="container">
-    <form action="{{url_for('confirm_event_new')}}" method="post">
+    <form action="{{url_for('confirm_event_edit')}}" method="post">
+        <div class="form-group">
+            <input type="hidden" class="form-control" name="event_id" value="{{event.event_id}}">
+        </div>
 
         <div class="form-group">
             <label for="event_name" class="form-label">イベント名<span style="color: red;">(必須)</span></label>
-            <input type="text" class="form-control" id="event_name" name="event_name" required>
+            <input type="text" class="form-control" id="event_name" name="event_name" value="{{event.event_name}}" required>
         </div>
     
         <div class="form-group">
@@ -19,27 +21,27 @@
                     <input class="form-check-input" type="checkbox" value="" id="{{ event_category.id }}" name="event_categories">
                     <label class="form-check-label" for="{{ event_category.id }}">{{ event_category.category_name }}</label>
                 {% else %}
-                <input type="radio" id="contactChoice1" name="event_category_id" value="1" checked required>1
+                <input type="radio" id="contactChoice1" name="event_category_id" value="{{event.event_category_id}}" checked required>{{event.event_category_id}}
                 {% endfor %}
             </div>
         </div>
     
         <div class="form-group">
             <label for="event_place"  class="form-label">開催場所</label>
-            <input type="text" class="form-control" id="event_place" name="event_place">
+            <input type="text" class="form-control" id="event_place" name="event_place" value="{{event.event_place}}">
         </div>
         
         <div class="form-group">
             <label for="event_date"  class="form-label">開催日</label>  
-            <input type="date" class="form-control" id="event_date" name="event_date">
+            <input type="date" class="form-control" id="event_date" name="event_date" value="{{event.event_date}}">
         </div>
     
         <div class="form-group">
-            <label for="event_overview" class="form-label">概要</label>
-            <textarea type="text" class="form-control" id="event_overview" name="event_overview"></textarea>
+            <label for="overview" class="form-label">概要</label>
+            <textarea type="text" class="form-control" id="overview" name="event_overview">{{event.event_overview}}</textarea>
         </div>
     
-        <button type="submit" class="btn">確認</button>
+        <button type="submit" class="btn btn-primary" style="margin-bottom:40px;">確認</button>
     </form>
     
     <a href="{{url_for('show_event_list')}}" class="btn btn-secondary">一覧に戻る</a>

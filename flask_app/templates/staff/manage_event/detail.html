@@ -1,0 +1,16 @@
+{% extends "layout_staff.html" %} 
+{% block body %}
+
+
+    <h1>{{event.event_name}}</h1>
+
+    <p>開催日：{{event.event_date}}</p>
+    <p>開催場所：{{event.event_place}}</p>
+    <p>概要<br>{{event.event_overview}}</p>
+
+    <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-primary">編集</a>
+    <a href="{{url_for('show_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
+    <button>削除</button>
+
+
+{% endblock %}
