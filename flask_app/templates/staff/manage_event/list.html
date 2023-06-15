@@ -90,8 +90,7 @@
                       <div>
                         <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-secondary">変更</a>
                         {% if event.isDeletable != false %}
-                        <input type="submit" formaction="/"
-                        class="half_button" value="削除" />
+                          <a href="{{url_for('delete_event_list', event_id=event.event_id)}}" class="btn btn-danger">削除</a>
                         {% endif %}
                       </div>
                     </td>
