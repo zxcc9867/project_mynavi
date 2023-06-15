@@ -21,7 +21,7 @@
                     <input class="form-check-input" type="checkbox" value="" id="{{ event_category.id }}" name="event_categories">
                     <label class="form-check-label" for="{{ event_category.id }}">{{ event_category.category_name }}</label>
                 {% else %}
-                <input type="radio" id="contactChoice1" name="event_category_id" value="{{event.event_category_id}}">{{event.event_category_id}}
+                <input type="radio" id="contactChoice1" name="event_category_id" value="{{event.event_category_id}}" checked required>{{event.event_category_id}}
                 {% endfor %}
             </div>
         </div>
