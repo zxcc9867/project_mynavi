@@ -56,7 +56,7 @@
                     <td class="">{{event.event_place}}</td>
                     <td class="action_button">
                       <div>
-                        <a href="{{url_for('show_event_edit', event_id=event.id)}}" class="btn btn-secondary">変更</a>
+                        <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-secondary">変更</a>
                         {% if event.isDeletable != false %}
                         <input type="submit" formaction="/"
                         class="half_button" value="削除" />
@@ -88,7 +88,7 @@
                     <td class="">{{event.event_place}}</td>
                     <td class="action_button">
                       <div>
-                        <a href="{{url_for('show_event_edit', event_id=event.id)}}" class="btn btn-secondary">変更</a>
+                        <a href="{{url_for('show_event_edit', event_id=event.event_id)}}" class="btn btn-secondary">変更</a>
                         {% if event.isDeletable != false %}
                         <input type="submit" formaction="/"
                         class="half_button" value="削除" />
