@@ -2,10 +2,7 @@
 
 {% block body %}
 
-<!-- 機能共用 CSS -->
-<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
 
-<!-- ナビゲーション領域 -->
 <nav>
   <div class="container">
     <p class="menu">
@@ -15,41 +12,36 @@
   </div>
 </nav>
 
+
 <!-- メインコンテンツ領域 -->
 <main>
   <div class="container">
     <h1 id="main_title">
       イベントカテゴリ一覧
     </h1>
-
+    <a href="{{ url_for('show_input_form', mode='create') }}" class="btn btn-primary">イベントカテゴリ名新規登録</a>
     <div id="list_area" class="base_pattern">
       <div id="output_list_table">
-        <!-- ここに一覧表を表示する --> {#여기에 데이터베이스 내용 표시#}
+        <!-- ここに一覧表を表示する -->
         <table border="1">
           <tbody>
             <tr>
-              <th class="category_name">イベントカテゴリ名</th>
+              <th class="event_category_name">イベントカテゴリ名</th>
               <th class="action_button"></th>
             </tr>
-            {% for event_category in mst_category %}
+            {% for category in categories %}
             <tr>
-              <form method="post">
-                <td class="event_category_name">{{event_category.event_category_name}}</td>
-
-                <!-- hidden属性の項目 -->
-                <input name="event_category_id" type="hidden" value="{{event_category.event_category_id }}">
-                
-                <td class="action_button">
-                  <div>
-                    <input type="submit" formaction="{{ url_for('update', mode='update') }}" class="half_button"
-                      value="変更" />
-                    {% if event_category.isDeletable != false %}
-                    <input type="submit" formaction="{{ url_for('delete', mode='delete') }}"
-                      class="half_button" value="削除" />
-                    {% endif %}
-                  </div>
-                </td>
-              </form>
+              <th class="category_name">{{ category.event_category_name }}</th>
+              <th class="category_form">
+                <form action='{{ url_for("show_input_form", mode="update") }}' method="post">
+                  <button type="submit" class="btn btn-primary" name="event_category_id"
+                    value="{{category.event_category_id}}">変更</button>
+                </form>
+                <form action='{{ url_for("show_input_form", mode="delete") }}' method="post">
+                  <button type="submit" class="btn btn-primary" name="event_category_id"
+                    value="{{category.event_category_id}}">削除</button>
+                </form>
+              </th>
             </tr>
             {% else %}
             ユーザーデータが存在しません。
@@ -58,7 +50,9 @@
         </table>
       </div>
     </div>
-    <div id="button_area"></div>
+    <div id="button_area">
+
+    </div>
   </div>
 </main>
 {% endblock %}
