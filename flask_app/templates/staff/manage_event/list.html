@@ -41,7 +41,7 @@
             {% for event in events%}
             <tr>
               <form method="post">
-                <td class="">{{event.event_name}}</td>
+                <td class=""><a href="{{url_for('show_event_detail', event_id=event.event_id)}}">{{event.event_name}}</a></td>
                 <td class="">{{event.event_date}}</td>
                 <td class="">{{event.event_place}}</td>
 
