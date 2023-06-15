@@ -30,34 +30,80 @@
     <div id="list_area" class="base_pattern">
       <div id="output_list_table">
         <!-- ここに一覧表を表示する -->
-        <table border="1">
-          <tbody>
-            <tr>
-              <th class="">イベント名</th>
-              <th class="">開催日</th>
-              <th class="">開催場所</th>
-              <th class="action_button"></th>
-            </tr>
-            {% for event in events%}
-            <tr>
-              <form method="post">
-                <td class="">{{event.event_name}}</td>
-                <td class="">{{event.event_date}}</td>
-                <td class="">{{event.event_place}}</td>
-
-
-                <td class="action_button">
-                  <div>
-                    <a href="{{url_for('show_event_edit', event_id=event.id)}}" class="btn btn-secondary">変更</a>
-                    <input type="submit" formaction="/"
-                      class="half_button" value="削除" />
-                  </div>
-                </td>
-              </form>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab">開催予定/開催中</a>
+          </li>
+          <li>
+            <a class="nav-link" data-bs-toggle="tab">開催済</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="" class="tab-pane active">
+            <table border="1">
+              <tbody>
+                <tr>
+                  <th class="">イベント名</th>
+                  <th class="">開催日</th>
+                  <th class="">開催場所</th>
+                  <th class="action_button"></th>
+                </tr>
+                {% for event in events%}
+                <tr>
+                  <form method="post">
+                    <td class="">{{event.event_name}}</td>
+                    <td class="">{{event.event_date}}</td>
+                    <td class="">{{event.event_place}}</td>
+                    <td class="action_button">
+                      <div>
+                        <a href="{{url_for('show_event_edit', event_id=event.id)}}" class="btn btn-secondary">変更</a>
+                        {% if event.isDeletable != false %}
+                        <input type="submit" formaction="/"
+                        class="half_button" value="削除" />
+                        {% endif %}
+                      </div>
+                    </td>
+                  </form>
+                </tr>
+                {% else %}
+                イベントデータが存在しません。
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div id="" class="tab-pane">
+            <table border="1">
+              <tbody>
+                <tr>
+                  <th class="">イベント名</th>
+                  <th class="">開催日</th>
+                  <th class="">開催場所</th>
+                  <th class="action_button"></th>
+                </tr>
+                {% for event in events%}
+                <tr>
+                  <form method="post">
+                    <td class="">{{event.event_name}}</td>
+                    <td class="">{{event.event_date}}</td>
+                    <td class="">{{event.event_place}}</td>
+                    <td class="action_button">
+                      <div>
+                        <a href="{{url_for('show_event_edit', event_id=event.id)}}" class="btn btn-secondary">変更</a>
+                        {% if event.isDeletable != false %}
+                        <input type="submit" formaction="/"
+                        class="half_button" value="削除" />
+                        {% endif %}
+                      </div>
+                    </td>
+                  </form>
+                </tr>
+                {% else %}
+                イベントデータが存在しません。
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
     <div id="button_area"></div>
