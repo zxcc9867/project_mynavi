@@ -17,7 +17,7 @@ def show_event_list():
 @is_staff_login
 def show_event_detail(event_id):
     event = read_event_one(event_id)
-    return render_template('detail.html', event=event)
+    return render_template('/staff/manage_event/detail.html', event=event)
 
 @app.route("/show_event_new", methods=['GET'])
 @is_staff_login
@@ -44,4 +44,21 @@ def show_event_edit(event_id):
     event = read_event_one(event_id)
     return render_template('/staff/manage_event/edit.html', event=event)
 
+@app.route("/show_event_edit/confirm", methods=['GET','POST'])
+@is_staff_login
+def confirm_event_edit():
+    event_id = request.form.get('event_id')
+    event_category_id = request.form.get('event_category_id')
+    event_name = request.form.get('event_name')
+    event_place = request.form.get('event_place')
+    event_date = request.form.get('event_date')
+    event_overview = request.form.get('event_overview')
+    print(event_id)
+    return render_template('/staff/manage_event/confirm_edit.html', event_id=event_id, event_category_id=event_category_id,event_name=event_name, event_place=event_place, event_date=event_date, event_overview=event_overview)
 
+@app.route("/show_event_edit/submit", methods=['POST'])
+@is_staff_login
+def submit_event_edit():
+    event_id = request.form.get('event_id')
+    update_event(event_id, request)
+    return redirect(url_for('show_event_list'))
