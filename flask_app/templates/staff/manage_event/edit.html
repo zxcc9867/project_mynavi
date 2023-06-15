@@ -18,8 +18,10 @@
             {# チェックボックスを置き、複数のカテゴリを選択できるようにする #}
             <div class="form-check">
                 {% for event_category in event_categories %}
-                    <input class="form-check-input" type="checkbox" value="" id="{{ event_category.id }}" name="event_categories">
-                    <label class="form-check-label" for="{{ event_category.id }}">{{ event_category.category_name }}</label>
+                    <div class="radioclass">
+                        <input class="form-check-input" type="radio" value="{{event_category.event_category_id}}" id="{{event_category.event_category_id}}" name="event_category_id">
+                        <label class="form-check-label" for="{{event_category.event_category_id}}">{{event_category.event_category_name}}</label>
+                    </div>
                 {% else %}
                 <input type="radio" id="contactChoice1" name="event_category_id" value="{{event.event_category_id}}" checked required>{{event.event_category_id}}
                 {% endfor %}
