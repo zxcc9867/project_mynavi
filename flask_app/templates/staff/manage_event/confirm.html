@@ -8,22 +8,22 @@
 
     <div class="form-group">
         <label for="event_name" class="form-label">イベント名<span style="color: red;">(必須)</span></label>
-        <input type="text" class="form-control" id="event_name" name="event_name" value="aaa" required readonly>
+        <input type="text" class="form-control" id="event_name" name="event_name" value="{{event_name}}" required readonly>
     </div>
 
     <div class="form-group">
         <label for="event_place"  class="form-label">開催場所</label>
-        <input type="text" class="form-control" id="event_place" name="event_place" value="bbb" readonly>
+        <input type="text" class="form-control" id="event_place" name="event_place" value="{{event_place}}" readonly>
     </div>
 
     <div class="form-group">
         <label for="event_date"  class="form-label">開催日</label>  
-        <input type="date" class="form-control" id="event_date" name="event_date" value="2020-01-01" readonly>
+        <input type="date" class="form-control" id="event_date" name="event_date" value="{{event_date}}" readonly>
     </div>
 
     <div class="form-group">    
         <label for="overview" class="form-label">概要</label>
-        <textarea type="text" class="form-control" id="overview" name="overview" readonly>aaaa</textarea>
+        <textarea type="text" class="form-control" id="overview" name="overview" readonly>{{overview}}</textarea>
     </div>
     <button type="submit" class="btn">新規登録</button>
 </form>

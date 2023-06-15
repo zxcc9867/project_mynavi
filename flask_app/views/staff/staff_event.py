@@ -13,11 +13,11 @@ def show_event_list():
     events = read_event()
     return render_template('/staff/manage_event/list.html', events=events)
 
-# @app.route("/staff_manage_event/detail/<int:staff_id>", methods=['GET'])
-# @is_staff_login
-# def show_event_detail(staff_id):
-#     staff = read_event_one(staff_id)
-#     return render_template('detail.html', id=staff.id)
+@app.route("/staff_manage_event/detail/<int:event_id>", methods=['GET'])
+@is_staff_login
+def show_event_detail(event_id):
+    event = read_event_one(event_id)
+    return render_template('detail.html', event=event)
 
 @app.route("/show_event_new", methods=['GET'])
 @is_staff_login
@@ -32,6 +32,11 @@ def confirm_event_new():
     event_date = request.form.get('event_date')
     overview = request.form.get('overview')
     return render_template('confirm.html', event_name=event_name, event_place=event_place, event_date=event_date, overview=overview)
+
+@app.route("/show_event_new/submit")
+@is_staff_login
+def submit_event_new():
+    create_event(request)
 
 @app.route("/show_event_edit/<int:event_id>", methods=['GET'])
 @is_staff_login
