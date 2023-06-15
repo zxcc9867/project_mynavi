@@ -1,4 +1,4 @@
-from flask import redirect, render_template, session
+from flask import redirect, render_template, session, Markup
 from flask_app.__init__ import app
 from flask_app.views.staff.common.staff_common import is_staff_login
 
