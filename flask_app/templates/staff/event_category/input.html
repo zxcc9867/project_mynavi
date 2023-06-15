@@ -1,0 +1,50 @@
+{% extends "layout_staff.html" %}
+
+{% block body %}
+
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- ナビゲーション領域 -->
+<nav>
+  <div class="container">
+    <p class="menu">
+      <a href="{{ url_for('staff_staff_top') }}">スタッフメニュー</a>
+      >
+      <a href="{{ url_for('show_main_category') }}">イベントカテゴリ管理</a>
+      {% if mode == 'create' %}
+      > 新規登録
+      {% elif mode == 'update' %}
+      > 変更内容入力
+      {% endif %}
+    </p>
+  </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    
+    <form action="{{url_for('add_event_category', event_category_id=target_event_category.event_category_id )}}" method="post">
+      {% if mode=="create" %}
+      <p><span>以下に新規登録内容を記述してください。</span></p>
+      <label for="event_category_name">イベントカテゴリ名</label>
+      <br>
+      <input type="text" name="event_category_name" id="event_category_name">
+      {% elif mode=="update" %}
+      <p><span>以下に変更内容を記述してください。</span></p>
+      <label for="event_category_name">イベントカテゴリ名</label>
+      <br>
+      <input type="hidden" name="event_category_id" value="{{ target_event_category.event_category_id }}">
+      <input name="event_category_name" name="event_category_name" value="{{ target_event_category.event_category_name }}" type="text">
+      {% endif %}
+      {% if mode=="create" %}
+      <button type="submit" class="btn btn-primary" name="button" value="create">新規登録</button>
+      {% elif mode=="update" %}
+      <button type="submit" class="btn btn-primary" name="button" value="update">変更</button>
+      {% endif %}
+    </form>
+  </div>
+</main>
+
+{% endblock %}
