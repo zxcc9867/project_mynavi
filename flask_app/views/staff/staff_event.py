@@ -42,6 +42,7 @@ def confirm_event_new():
 @is_staff_login
 def submit_event_new():
     create_event(request)
+    flash('新しいイベントを登録しました')
     return redirect(url_for('show_event_list'))
 
 @app.route("/show_event_edit/<int:event_id>", methods=['GET'])
@@ -68,10 +69,12 @@ def confirm_event_edit():
 def submit_event_edit():
     event_id = request.form.get('event_id')
     update_event(event_id, request)
+    flash('イベントを更新しました')
     return redirect(url_for('show_event_list'))
 
 @app.route("/delete_event_list/<int:event_id>", methods=['GET','POST'])
 @is_staff_login
 def delete_event_list(event_id):
     delete_event(event_id)
+    flash('イベントを削除しました')
     return redirect(url_for('show_event_list'))
