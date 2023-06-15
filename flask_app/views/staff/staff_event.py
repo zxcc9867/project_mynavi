@@ -64,3 +64,9 @@ def submit_event_edit():
     event_id = request.form.get('event_id')
     update_event(event_id, request)
     return redirect(url_for('show_event_list'))
+
+@app.route("/delete_event_list/<int:event_id>", methods=['GET','POST'])
+@is_staff_login
+def delete_event_list(event_id):
+    delete_event(event_id)
+    return redirect(url_for('show_event_list'))
