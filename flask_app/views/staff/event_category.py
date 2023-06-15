@@ -41,7 +41,7 @@ def show_input_form(mode):
             event_category_id=''
             event_category_name=''
             print("hello") # デバック処理通ってます。
-            return render_template('staff/event_category/input.html', mode=mode, tage)
+            return render_template('staff/event_category/input.html', mode=mode, target_event_category=None)
         
         if mode=='update':
             event_category_id=request.form.get('event_category_id')
@@ -50,17 +50,13 @@ def show_input_form(mode):
             return render_template('staff/event_category/input.html', mode=mode, target_event_category=target_event_category)
         
         if mode=='delete':
-            print("hehe")
-            delete_ev_category_name = request.form.get('event_category_id')
-            dt = db.session.query(Mst_event_category).filter_by(event_category_name=delete_ev_category_name).first()
-            if dt is None:  # 없다면 , 신규 등록
-                flash("データがありません。")
-                message = None
-                return render_template('staff/event_category/list.html', message=message)
-            else:
-                message = request.form['event_category_name']+"が削除されました。"
-                db.session.commit()
-                return render_template('staff/event_category/list.html', message=message)
+            target_category_id=request.form.get('event_category_id')
+            target_event_category = read_event_category_one(target_category_id)
+
+            delete_event_category(target_event_category.event_category_id)
+
+            flash('削除しました')
+            return redirect(url_for('show_main_category'))
             
 
     return render_template('staff/event_category/confirm.html', message=message)
