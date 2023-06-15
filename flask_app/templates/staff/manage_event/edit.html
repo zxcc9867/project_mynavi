@@ -1,0 +1,51 @@
+{% extends "layout_staff.html" %} 
+
+{% block body %}
+
+<div class="container">
+    <form action="{{url_for('confirm_event_edit')}}" method="post">
+        <div class="form-group">
+            <input type="hidden" class="form-control" name="event_id" value="{{event.event_id}}">
+        </div>
+
+        <div class="form-group">
+            <label for="event_name" class="form-label">イベント名<span style="color: red;">(必須)</span></label>
+            <input type="text" class="form-control" id="event_name" name="event_name" value="{{event.event_name}}" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="event_categories" class="form-label">イベントカテゴリ</label>
+            {# チェックボックスを置き、複数のカテゴリを選択できるようにする #}
+            <div class="form-check">
+                {% for event_category in event_categories %}
+                    <input class="form-check-input" type="checkbox" value="" id="{{ event_category.id }}" name="event_categories">
+                    <label class="form-check-label" for="{{ event_category.id }}">{{ event_category.category_name }}</label>
+                {% else %}
+                <input type="radio" id="contactChoice1" name="event_category_id" value="{{event.event_category_id}}">{{event.event_category_id}}
+                {% endfor %}
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="event_place"  class="form-label">開催場所</label>
+            <input type="text" class="form-control" id="event_place" name="event_place" value="{{event.event_place}}">
+        </div>
+        
+        <div class="form-group">
+            <label for="event_date"  class="form-label">開催日</label>  
+            <input type="date" class="form-control" id="event_date" name="event_date" value="{{event.event_date}}">
+        </div>
+    
+        <div class="form-group">
+            <label for="overview" class="form-label">概要</label>
+            <textarea type="text" class="form-control" id="overview" name="event_overview">{{event.event_overview}}</textarea>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" style="margin-bottom:40px;">確認</button>
+    </form>
+    
+    <a href="{{url_for('show_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout_staff.html" %} 
+
+{% block body %}
+
+{# イベントの登録フォーム #}
+
+<form action="{{url_for('submit_event_edit')}}" method="post">
+
+    <div class="form-group">
+        <input type="hidden" class="form-control" value="{{event_id}}" name="event_id">
+    </div>
+    <p>{{event_id}}</p>
+    <div class="form-group">
+        <label for="event_name" class="form-label">イベント名<span style="color: red;">(必須)</span></label>
+        <input type="text" class="form-control" id="event_name" name="event_name" value="{{event_name}}" required readonly>
+    </div>
+
+    <div class="form-group">
+        <input type="hidden" class="form-control" name="event_category_id" value="{{event_category_id}}">{{event_category_id}}
+    </div>
+
+    <div class="form-group">
+        <label for="event_place"  class="form-label">開催場所</label>
+        <input type="text" class="form-control" id="event_place" name="event_place" value="{{event_place}}" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="event_date"  class="form-label">開催日</label>  
+        <input type="date" class="form-control" id="event_date" name="event_date" value="{{event_date}}" readonly>
+    </div>
+
+    <div class="form-group">    
+        <label for="overview" class="form-label">概要</label>
+        <textarea type="text" class="form-control" id="overview" name="event_overview" readonly>{{event_overview}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">更新</button>
+</form>
+
+<a href="{{url_for('show_event_new')}}" class="btn btn-secondary" style="margin-bottom:40px;">前に戻る</a>
+
+{% endblock %}

@@ -7,7 +7,7 @@ class Mst_event(db.Model):
     event_id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     event_category_id = db.Column(db.Integer, db.ForeignKey(Mst_event_category.event_category_id))
     event_name = db.Column(db.String(50))
-    event_date = db.Column(db.String(10))
+    event_date = db.Column(db.Date)
     event_place = db.Column(db.String(30))
     event_overview = db.Column(db.String(200))
 
