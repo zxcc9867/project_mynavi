@@ -1,6 +1,6 @@
 from flask_app.database import db
 from flask_app.models.mst_event import Mst_event
-
+from datetime import date
 
 # イベント　新規登録
 def create_event(request):
@@ -68,3 +68,16 @@ def delete_event(event_id):
     db.session.commit()
 
     return
+
+# イベント　日付順
+def read_event_with_date():
+    today = date.today()
+    print(today)
+    events_yet = Mst_event.query.filter(
+        Mst_event.event_date >= today
+    ).all()
+    events_done = Mst_event.query.filter(
+        Mst_event.event_date < today
+    ).all()
+    print(events_yet, events_done)
+    return events_yet, events_done
