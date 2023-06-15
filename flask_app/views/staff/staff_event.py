@@ -3,6 +3,7 @@ from flask import render_template, flash, request, redirect, session, url_for, M
 from flask_app.__init__ import app
 from flask_app.messages import ErrorMessages, InfoMessages
 from flask_app.models.functions.customer import delete_customer, read_customer, update_customer
+from flask_app.models.functions.event_category import create_event_category, read_event_category, read_event_category_one, read_event_category_category_name
 from flask_app.models.functions.event import create_event, read_event, read_event_one, read_event_event_category, update_event, delete_event
 from flask_app.views.staff.common.staff_common import is_staff_login
 
@@ -22,7 +23,8 @@ def show_event_detail(event_id):
 @app.route("/show_event_new", methods=['GET'])
 @is_staff_login
 def show_event_new():
-    return render_template('/staff/manage_event/input.html')
+    event_categories = read_event_category()
+    return render_template('/staff/manage_event/input.html', event_categories=event_categories)
 
 @app.route("/show_event_new/confirm", methods=['GET','POST'])
 @is_staff_login
@@ -32,6 +34,7 @@ def confirm_event_new():
     event_place = request.form.get('event_place')
     event_date = request.form.get('event_date')
     event_overview = request.form.get('event_overview')
+    print(event_category_id)
     return render_template('/staff/manage_event/confirm.html', event_category_id=event_category_id,event_name=event_name, event_place=event_place, event_date=event_date, event_overview=event_overview)
 
 @app.route("/show_event_new/submit", methods=['POST'])

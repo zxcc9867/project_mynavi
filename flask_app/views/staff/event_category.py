@@ -1,5 +1,5 @@
 # Flaskとrender_template（HTMLを表示させるための関数）をインポート
-from flask import render_template, flash, request, redirect, session, url_for
+from flask import render_template, flash, request, redirect, session, url_for, Markup
 from flask_app.__init__ import app
 from flask_app.messages import ErrorMessages, InfoMessages
 from flask_app.models.functions.event_category import read_event_category_category_name, create_event_category, update_event_category, delete_event_category, read_event_category, read_event_category_one
