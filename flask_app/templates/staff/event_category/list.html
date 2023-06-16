@@ -29,13 +29,16 @@
               <th class="event_category_name">イベントカテゴリ名</th>
               <th class="action_button"></th>
             </tr>
-            {% for category in categories %}
+            {% for category in categories %} 
+            <!-- 데이터 베이스의 내용을 category에 넣음  -->
             <tr>
               <th class="category_name">{{ category.event_category_name }}</th>
-              <th class="category_form">
+              
+              <th class="category_form"> { #                                                   # }
                 <form action='{{ url_for("show_input_form", mode="update") }}' method="post">
                   <button type="submit" class="btn btn-primary" name="event_category_id"
                     value="{{category.event_category_id}}">変更</button>
+                   
                 </form>
                 <form action='{{ url_for("show_input_form", mode="delete") }}' method="post">
                   <button type="submit" class="btn btn-primary" name="event_category_id"

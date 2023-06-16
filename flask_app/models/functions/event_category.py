@@ -14,15 +14,15 @@ def create_event_category(request):
 
 
 # イベントカテゴリ　一覧取得
-def read_event_category():
+def read_event_category(): # 카테고리 데이터 베이스의 내용을 모두 불러옴. 
     mst_event_category = Mst_event_category.query.order_by(
-        Mst_event_category.event_category_id.desc()).all()
-    return mst_event_category
+        Mst_event_category.event_category_id.desc()).all() 
+    return mst_event_category # id의 내림차순으로 정렬된 데이터 베이스의 내용을 리턴함. 
 
 
 # イベントカテゴリ　一件取得
 def read_event_category_one(event_category_id):
-    event_category = Mst_event_category.query.get(event_category_id)
+    event_category = Mst_event_category.query.get(event_category_id) # 입력폼에서 입력된 이름의 id를 읽어서 get으로 읽는다. 
     return event_category
 
 

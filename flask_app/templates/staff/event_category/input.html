@@ -26,17 +26,24 @@
   <div class="container">
     
     <form action="{{url_for('add_event_category', event_category_id=target_event_category.event_category_id )}}" method="post">
+      <!-- {# 위의 코드가 어떤 것을 나타내는지 확인할 것 #} -->
       {% if mode=="create" %}
       <p><span>以下に新規登録内容を記述してください。</span></p>
       <label for="event_category_name">イベントカテゴリ名</label>
+      <!-- {# label for는 id가 event_category_name 해당되는 input 폼을 연결한다.  #} -->
+      <!-- {# 즉,<input type="text" name="event_category_name" id="event_category_name"> 를 연결한다. #} -->
+
       <br>
       <input type="text" name="event_category_name" id="event_category_name">
+      <!-- 위의 코드로 작성하면, name은 키 값이고, id는 고유한 값이고, 
+      파이썬 파일에서 request.form['event_category_name']으로 읽을 수 있다.  -->
+
       {% elif mode=="update" %}
       <p><span>以下に変更内容を記述してください。</span></p>
       <label for="event_category_name">イベントカテゴリ名</label>
       <br>
       <input type="hidden" name="event_category_id" value="{{ target_event_category.event_category_id }}">
-      <input name="event_category_name" name="event_category_name" value="{{ target_event_category.event_category_name }}" type="text">
+      <input name="event_category_name"  value="{{ target_event_category.event_category_name }}" type="text">
       {% endif %}
       {% if mode=="create" %}
       <button type="submit" class="btn btn-primary" name="button" value="create">新規登録</button>
