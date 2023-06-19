@@ -54,7 +54,7 @@ td {
 
 /* イベント情報 */
 #list_area td.event_date {
-	text-align: center;
+	text-align: left;
 }
 
 #list_area td.event_name {
