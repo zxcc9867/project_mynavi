@@ -1,0 +1,52 @@
+{% extends "layout_user.html" %}
+{% block body %}
+    
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css">
+
+<!-- メインコンテンツ領域 -->
+<main>
+  <div class="container">
+    <div style="display: flex;">
+        <h1 id="main_title">
+            イベント一覧
+        </h1>
+    </div>
+
+    <div id="list_area" class="base_pattern">
+      <div id="output_list_table">
+        <!-- ここに一覧表を表示する -->
+          <div id="events_yet">
+            <table border="1">
+              <tbody>
+                <tr>
+                  <th class="event_name">イベント名</th>
+                  <th class="event_date">開催日</th>
+                  <th class="event_place">開催場所</th>
+                  <th class="action_button"></th>
+                </tr>
+                {% for event in events_yet %}
+                  <tr>
+                    <form method="post">
+                      <td class="event_name">{{event.event_name}}</td>
+                      <td class="event_date">{{event.event_date}}</td>
+                      <td class="event_place">{{event.event_place}}</td>
+                      <td class="action_button">
+                        <div>
+                          <a href="" class="btn btn-secondary" style="margin: 0 auto;">詳細へ</a>
+                        </div>
+                      </td>
+                    </form>
+                  </tr>
+                {% else %}
+                イベントデータが存在しません。
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <div id="button_area"></div>
+  </div>
+</main>
+{% endblock %}

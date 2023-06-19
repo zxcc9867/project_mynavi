@@ -8,10 +8,14 @@
 * ただし、ボタン用の列として110pxが別途確保（サイト共用のCSS table.cssを参照）
 * されているため、実際のテーブルの列幅は 860pxであるので注意。
 */
-#list_area .customer_account {
+#list_area .customer_account .event_name {
 	width: 400px;
 }
 
-#list_area .customer_name {
+#list_area .customer_name .event_date {
+	width: 350px;
+}
+
+#list_area .event_place {
 	width: 350px;
 }
