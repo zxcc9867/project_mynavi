@@ -33,27 +33,28 @@
 	<header>
 		<div class="container">
 			<div class="site_title">
-				<a href="{{url_for('show_user_event_list')}}"><img src="/static/images/logo_customer.png" alt="ムジクロチケット"></a>
+				<a href="{{url_for('show_customer_event_list')}}"><img src="/static/images/logo_customer.png" alt="ムジクロチケット"></a>
 			</div>
 			<div class="user_infomation">
 				<p>
-					{% if not session.logged_in_staff %}
+					{% if not session.logged_in_customer %}
 					ゲストさん
-					{% elif session.logged_in_staff_account %}
-					{{ session.logged_in_staff_name }}さん
+					{# elif session.logged_in_staff_account #}
+					{% elif session.logged_in_customer_account %}
+					{{ session.logged_in_customer_name }}さん
 					{% endif %}
 				</p>
 				<div style="display: flex;">
 					<p style="margin-right: 10px;">
-						{% if session.logged_in_staff %}
+						{% if session.logged_in_customer %}
 						<input id="" type="button" value="マイページ"
 							onClick="location.href=``">
 						{% endif %}
 					</p>
 					<p style="margin-left: auto;">
-						{% if session.logged_in_staff %}
+						{% if session.logged_in_customer %}
 						<input id="logout_button" type="button" value="ログアウト"
-							onClick="location.href=``">
+							onClick="location.href=`{{url_for('customer_logout')}}`">
 						{% else %}
 						<input id="logout_button" type="button" value="ログイン"
 						onClick="location.href=`{{url_for('show_login')}}`">
