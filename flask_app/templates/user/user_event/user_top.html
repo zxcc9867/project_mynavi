@@ -22,7 +22,7 @@
                 <tr>
                   <th class="event_name">イベント名</th>
                   <th class="event_date">開催日</th>
-                  <th class="event_place">開催場所</th>
+                  <th class="event_category_name">カテゴリ名</th>
                   <th class="action_button"></th>
                 </tr>
                 {% for event in events_yet %}
@@ -30,7 +30,7 @@
                     <form method="post">
                       <td class="event_name">{{event.event_name}}</td>
                       <td class="event_date">{{event.event_date}}</td>
-                      <td class="event_place">{{event.event_place}}</td>
+                      <td class="event_category_name"></td>
                       <td class="action_button">
                         <div>
                           <a href="{{ url_for('show_user_event_detail', event_id=event.event_id) }}" class="btn btn-success" style="margin: 0 auto;">詳細へ</a>
