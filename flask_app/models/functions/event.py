@@ -75,9 +75,9 @@ def read_event_with_date():
     print(today)
     events_yet = Mst_event.query.filter(
         Mst_event.event_date >= today
-    ).all()
+    ).order_by(Mst_event.event_date)
     events_done = Mst_event.query.filter(
         Mst_event.event_date < today
-    ).all()
+    ).order_by(Mst_event.event_date)
     print(events_yet, events_done)
     return events_yet, events_done
