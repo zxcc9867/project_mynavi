@@ -44,13 +44,13 @@
 					{% endif %}
 				</p>
 				<div style="display: flex;">
-					<p>
+					<p style="margin-right: 10px;">
 						{% if session.logged_in_staff %}
 						<input id="" type="button" value="マイページ"
 							onClick="location.href=``">
 						{% endif %}
 					</p>
-					<p style="margin-left: 10px;">
+					<p style="margin-left: auto;">
 						{% if session.logged_in_staff %}
 						<input id="logout_button" type="button" value="ログアウト"
 							onClick="location.href=``">

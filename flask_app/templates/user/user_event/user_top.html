@@ -33,7 +33,7 @@
                       <td class="event_place">{{event.event_place}}</td>
                       <td class="action_button">
                         <div>
-                          <a href="" class="btn btn-secondary" style="margin: 0 auto;">詳細へ</a>
+                          <a href="{{ url_for('show_user_event_detail', event_id=event.event_id) }}" class="btn btn-success" style="margin: 0 auto;">詳細へ</a>
                         </div>
                       </td>
                     </form>
