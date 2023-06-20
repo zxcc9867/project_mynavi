@@ -13,7 +13,7 @@ def show_login():
 def customer_login():
     print(Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=request.form.get('customer_account')).all())
     if Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=request.form.get('customer_account')).all():
-        if Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_password=request.form.get('customer_password')).all:
+        if Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_password=request.form.get('customer_password')).all():
             customer_array = read_customer_customer_account(request.form.get('customer_account'))
             customer = customer_array[0]
             session['logged_in_customer'] = True
