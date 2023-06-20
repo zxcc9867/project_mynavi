@@ -1,0 +1,66 @@
+{% extends "layout_user.html" %}
+{% block body %}
+
+<div class="container">
+  <h1 id="main_title">
+    <!-- ここに ページタイトルを表示する -->
+  </h1>
+  <h2 id="main_sub_title">会員情報</h2>
+
+  <form action="{{url_for('signup')}}" name="inputForm" method="post">
+    <div id="form_area" class="base_pattern">
+      <p>アカウント名：</p>
+      <p><input name="customer_account" class="info" type="text" value="{{ customer_account }}" readonly="readonly">
+      </p>
+
+      <p>パスワード<span class="required">（必須）</span>：</p>
+      <p><input name="customer_password" class="info" type="password" value="{{ customer_password }}"
+          readonly="readonly">
+      </p>
+
+      <p>会員名<span class="required">（必須）</span>：</p>
+      <p><input name="customer_name" class="info" type="text" value="{{ customer_name }}" readonly="readonly"></p>
+
+      <p>郵便番号</p>
+      <p><input name="customer_zipcode" class="info" type="text" value="{{ customer_zipcode }}" readonly="readonly">
+      </p>
+
+      <p>住所</p>
+      <p><input name="customer_address" class="info" type="text" value="{{ customer_address }}" readonly="readonly">
+      </p>
+
+      <p>電話番号：</p>
+      <p><input name="customer_phone" class="info" type="text" value="{{ customer_phone }}" readonly="readonly"></p>
+
+      <p>支払方法：</p>
+      <p class="radioButton">
+        {% if customer_payment == '0' %}
+        <input type="radio" name="customer_payment" value="1" disabled="disabled">
+        クレジットカード &nbsp;&nbsp;
+        <input type="radio" name="customer_payment" value="2" disabled="disabled">
+        キャッシュレス決済 &nbsp;&nbsp;
+        <input type="radio" name="customer_payment" value="0" checked="checked">
+        未選択
+        {% elif customer_payment == '1' %}
+        <input type="radio" name="customer_payment" value="1" checked="checked">
+        クレジットカード &nbsp;&nbsp;
+        <input type="radio" name="customer_payment" value="2" disabled="disabled">
+        キャッシュレス決済 &nbsp;&nbsp;
+        <input type="radio" name="customer_payment" value="0" disabled="disabled">
+        未選択
+        {% elif customer_payment == '2' %}
+        <input type="radio" name="customer_payment" value="1" disabled="disabled">
+        クレジットカード &nbsp;&nbsp;
+        <input type="radio" name="customer_payment" value="2" checked="checked">
+        キャッシュレス決済 &nbsp;&nbsp;
+        <input type="radio" name="customer_payment" value="0" disabled="disabled">
+        未選択
+        {% endif %}
+      </p>
+    </div>
+
+    <button class="btn btn-primary" type="submit" style="margin-bottom:60px;">登録</button>
+  </form>
+</div>
+
+{% endblock %}
