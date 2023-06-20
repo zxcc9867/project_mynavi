@@ -10,6 +10,7 @@ import flask_app.views.staff.event_category
 import flask_app.views.staff.staff_event
 import flask_app.views.staff.staff_ticket
 import flask_app.views.user.user_top
+import flask_app.views.user.user_login
 
 
 app.secret_key = 'hoge'

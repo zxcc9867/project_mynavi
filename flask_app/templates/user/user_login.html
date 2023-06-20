@@ -1,4 +1,20 @@
 {% extends "layout_user.html" %}
 {% block body %}
 
+<form action="{{url_for('customer_login')}}" method="post">
+    <div class="form-group">
+        <label class="form-label" for="customer_account">アカウント名：</label>
+        <input class="form-control" id="customer_account" name="customer_account" type="text"> 
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="customer_password">パスワード：</label>
+        <input class="form-control" id="customer_password" name="customer_password" type="password"> 
+    </div>
+
+    <button class="btn btn-primary" type="submit">ログイン</button> 
+</form>
+
+<a href="{{url_for('show_signup')}}">アカウント登録はこちら</a>
+
 {% endblock %}
