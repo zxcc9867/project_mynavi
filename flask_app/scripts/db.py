@@ -4,7 +4,7 @@ from flask_script import Command
 from flask_app import database
 from flask_app.models.functions.staff import read_staff
 from flask_app.models.functions.staff import create_staff_script
-# from flask_app.models.mst_user import User
+# from flask_app.models.mst_customer import customer
 
 
 class InitDB(Command):
