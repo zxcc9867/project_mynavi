@@ -1,7 +1,9 @@
 from flask import render_template, flash, request, redirect, session, url_for, Markup
 from flask_app.__init__ import app
 from flask_app.models.mst_customer import Mst_customer
+from flask_app.models.functions.customer import read_customer_customer_account
 from flask_app.__init__ import db
+
 
 @app.route('/show_login', methods=['GET'])
 def show_login():
@@ -12,7 +14,12 @@ def customer_login():
     print(Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=request.form.get('customer_account')).all())
     if Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=request.form.get('customer_account')).all():
         if Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_password=request.form.get('customer_password')).all:
+            customer_array = read_customer_customer_account(request.form.get('customer_account'))
+            customer = customer_array[0]
             session['logged_in_customer'] = True
+            session['logged_in_customer_account'] = customer.customer_account
+            session['logged_in_customer_id'] = customer.customer_id
+            session['logged_in_customer_name'] = customer.customer_name
             return redirect(url_for('show_user_event_list'))
         else:
             flash('パスワードが違います')
@@ -24,6 +31,7 @@ def customer_login():
 @app.route('/customer_logout')
 def customer_logout():
     session.pop('logged_in_customer', None)
+    flash('ログアウトしました')
     return redirect(url_for('show_user_event_list'))
 
 @app.route('/show_sighup', methods=['GET'])
