@@ -21,7 +21,7 @@ def show_customer_event_detail(event_id):
 
 
 # Matsubara追記 ==>チケット予約機能遷移設定
-@app.route("/customer_event/detail/<int:event_id>/customer_reservation", methods =['GET','POST']) #customer
+@app.route("/customer_event/detail/<int:event_id>/reservation", methods =['GET','POST']) #customer
 def show_customer_reservation(event_id): # detail.html => this_reservation.html
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
