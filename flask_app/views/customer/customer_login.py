@@ -6,6 +6,28 @@ from flask_app.__init__ import db
 import hashlib  # この行を追加
 from flask_app.views.customer.common.customer_common import is_customer_login
 
+# def customer_validation():
+#     if request.form.get('customer_account') == '':
+#         flash('アカウント名を入力してください')
+#         return redirect(url_for('show_signup'))
+#     elif request.form.get('customer_password') == '':
+#         flash('パスワードを入力してください')
+#         return redirect(url_for('show_signup'))
+#     elif request.form.get('customer_name') == '':
+#         flash('ユーザー名を入力してください')
+#         return redirect(url_for('show_signup'))
+#     elif request.form.get('customer_zipcode') == '':
+#         flash('郵便番号を入力してください')
+#         return redirect(url_for('show_signup'))
+#     elif request.form.get('customer_address') == '':
+#         flash('住所を入力してください')
+#         return redirect(url_for('show_signup'))
+#     elif request.form.get('customer_phone') == '':
+#         flash('電話番号を入力してください')
+#         return redirect(url_for('show_signup'))
+#     else:
+#         return True
+
 
 @app.route('/show_login', methods=['GET'])
 def show_login():
@@ -49,24 +71,43 @@ def customer_logout():
     flash('ログアウトしました')
     return redirect(url_for('show_customer_event_list'))
 
+
+##### 以下サインアップ機能のルーティング #####
+
+
 @app.route('/show_sighup', methods=['GET'])
 def show_signup():
     return render_template('/customer/customer_signup/input.html')
 
 @app.route('/show_signup/confirm', methods=['POST'])
 def show_signup_confirm():
-    customer_account = request.form.get('customer_account')
-    customer_password = request.form.get('customer_password')
-    customer_name = request.form.get('customer_name')
-    customer_zipcode = request.form.get('customer_zipcode')
-    customer_address = request.form.get('customer_address')
-    customer_phone = request.form.get('customer_phone')
-    # customer_payment = request.form.get('customer_payment')
-
+    if request.form.get('customer_account') == '':
+        flash('アカウント名を入力してください')
+        return redirect(url_for('show_signup'))
+    elif request.form.get('customer_password') == '':
+        flash('パスワードを入力してください')
+        return redirect(url_for('show_signup'))
+    elif request.form.get('customer_name') == '':
+        flash('ユーザー名を入力してください')
+        return redirect(url_for('show_signup'))
+    elif request.form.get('customer_zipcode') == '':
+        flash('郵便番号を入力してください')
+        return redirect(url_for('show_signup'))
+    elif request.form.get('customer_address') == '':
+        flash('住所を入力してください')
+        return redirect(url_for('show_signup'))
+    elif request.form.get('customer_phone') == '':
+        flash('電話番号を入力してください')
+        return redirect(url_for('show_signup'))
+    else:
+        customer_account = request.form.get('customer_account')
+        customer_password = request.form.get('customer_password')
+        customer_name = request.form.get('customer_name')
+        customer_zipcode = request.form.get('customer_zipcode')
+        customer_address = request.form.get('customer_address')
+        customer_phone = request.form.get('customer_phone')
+        # customer_payment = request.form.get('customer_payment')
     return render_template('/customer/customer_signup/confirm.html', customer_account=customer_account, customer_password=customer_password, customer_name=customer_name, customer_zipcode=customer_zipcode, customer_address=customer_address, customer_phone=customer_phone)
-
-
-
 
 @app.route('/show_signup/signup', methods=['POST'])
 def signup():
