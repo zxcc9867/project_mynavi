@@ -37,10 +37,10 @@ def show_login():
 @app.route('/show_login/customer_login', methods=['GET','POST'])
 def customer_login():
     customer_account = request.form.get('customer_account')
-    customer_account_search = Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=customer_account).all()  # 入力されたアカウント名とデータべースのアカウント名が一致するアカウント名を抽出
+    # customer_account_search = Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=customer_account).all()  # 入力されたアカウント名とデータべースのアカウント名が一致するアカウント名を抽出
     # customer_password = request.form.get('customer_password')  # この行を削除
-    customer_password = hashlib.sha256(request.form.get('customer_password').encode()).hexdigest()  # この行を追加
-    customer_password_tuple = Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_account=customer_account).all()
+    customer_password = hashlib.sha256(request.form.get('customer_password').encode()).hexdigest()  
+    customer_password_tuple = Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_account=customer_account).all() # 入力されたアカウント名とデータベースのアカウント名が一致するレコードの、パスワードを抽出
     if not customer_password_tuple:
         flash('アカウント名またはパスワードが違います')
         return render_template('/customer/customer_login/customer_login.html')
