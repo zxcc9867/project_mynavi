@@ -1,0 +1,76 @@
+{% extends "layout_customer.html" %}
+{% block body %}
+
+<!-- 나중에 css 정의  -->
+<!-- <link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css"> -->
+
+<!-- 태그를 설정 까지 함  -->
+
+
+
+<main>
+    <div class="container">
+        <h1 id="main_title">
+          マイページ
+        </h1>
+    <div style="text-align: right;">
+        <button type="button" style="text-align: right; padding: 5px 10px; border: none; background-color: gray; color: white;">
+            一覧に戻る
+        </button>
+    </div>
+    <div id="list_area" class="base_pattern">
+        <div id="output_list_table">
+              <!-- ここに一覧表を表示する -->
+
+            <a href="">
+                <button type="button">
+                    変更する
+                </button>
+            </a>
+
+            <a href="">
+                <button type="button">
+                    退会する
+                </button>
+            </a>
+               <!-- 데이터들을 텍스트로 출력 ?? 테이블 형태가 아닌       -->
+              <table border="1">
+                <tbody>   
+                    <tr>
+                        <th class="customer_account">アカウント名</th>
+                        <th class="customer_name">名前</th>
+                        <th class="customer_zipcode">郵便番号</th>
+                        <th class="customer_address">住所</th>
+                        <th class="customer_phone">携帯電話番号</th>
+                        
+                        
+                    </tr>
+                   
+                    <tr>
+                        <form method="post">
+                 
+                     
+                        
+                        
+                  
+                        <td class="customer_account">{{customer_account}}</td> 
+                        <td class="customer_name">{{customer_name}}</td>
+                        <td class="customer_zipcode">{{customer_zipcode}}</td>
+                        <td class="customer_address">{{customer_address}}</td>
+                        <td class="customer_phone">{{customer_phone}}</td> 
+         
+                  </tr>
+                  </form>
+                
+            
+          </div>
+        </tr>
+       
+       
+        </tbody>
+        </table>
+        </div>
+        </div>
+    </main>
+    
+    {% endblock %}

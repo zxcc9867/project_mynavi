@@ -62,6 +62,8 @@ def input_customer(mode):
         customer_address = formdata['customer_address']
         customer_phone = formdata['customer_phone']
         customer_payment = formdata['customer_payment']
+
+
         # session削除
         session.pop('customer_formdata')
 
@@ -76,7 +78,7 @@ def input_customer(mode):
             customer_phone = request.form['customer_phone']
             customer_payment = request.form['customer_payment']
 
-    return render_template("/staff/manage_customer/input.html",
+    return render_template("/staff/manage_customer/input.html","/customer/mypage/mypage_top.html",
                            customer_id=customer_id,
                            customer_name=customer_name,
                            customer_account=customer_account,
