@@ -17,3 +17,10 @@ def show_customer_event_detail(event_id):
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
     return render_template('/customer/customer_event/detail.html', event=event, event_category=event_category)
+
+@app.route("/mypage", methods=['GET','POST'])
+def show_mypage():
+    mypage_list = read_customer()
+    user_name = session.get('username','')
+    print(user_name)
+    return render_template('/customer/mypage/mypage_top.html',message = mypage_list)

@@ -48,7 +48,7 @@
 					<p style="margin-right: 10px;">
 						{% if session.logged_in_customer %}
 						<input id="" type="button" value="マイページ"
-							onClick="location.href=``">
+							onClick="location.href=`{{url_for('show_mypage')}}`">
 						{% endif %}
 					</p>
 					<p style="margin-left: auto;">
