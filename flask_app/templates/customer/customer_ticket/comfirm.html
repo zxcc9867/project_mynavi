@@ -1,0 +1,65 @@
+{% extends "layout_customer.html" %}
+{% block body %}
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/custmer/custmer.css">
+<!-- ナビゲーション領域 -->
+<nav>
+    <div class="container">
+        <p class="menu">
+            <a href="{{ url_for('customer_coustomer_top') }}">会員一覧</a>
+            >
+            <a href="{{ url_for('customer_manage_ticket') }}">チケット予約</a>
+            {% if mode == 'get_ticket' %}
+            > チケット予約確認
+            {% elif mode == 'delete_ticket' %}
+            > チケット削除確認
+            {% endif %}
+
+        </p>
+    </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<div class="event_inf">
+    <div class ="confirm_text_area">
+        {% if mode = 'get_ticket' %}
+        <p>以下の内容でチケットを予約します。</p>
+        {% elif mode == 'delete_ticket' %}
+        <p>以下の内容でチケットを削除します。</p>
+    </div>
+    <div class="event_name"> <!--イベント名-->
+        <h1>アルティメットイベント名</h1>
+    </div>
+    <div class="event_date"> <!--イベント日時-->
+        <h1>2023/5/2</h1>
+    </div>
+    <div class="event_state"> <!--イベント場所-->
+        <h1>東京ビックサイト</h1>
+    </div>
+    <div class ="get_myintro">
+        <p>アカウント名</p>
+        <input class = "customer_acount_name" value="{{/}}" disabled><br>
+        <p>password</p>
+        <input class = "customer_acount_password" value="{{/}}" disabled><br>
+        <p>会社名</p>
+        <input class = "customer_acount_company" value="{{/}}" disabled><br>
+        <p>郵便番号</p>
+        <input class = "customer_acount_yubin_number" value="{{/}}" disabled><br>
+        <p>住所</p>
+        <input class = "customer_acount_address" value="{{/}}" disabled><br>
+        <p>電話番号</p>
+        <input class = "customer_acount_tel_number" value="{{/}}" disabled><br>
+
+    </div>
+    <div id="button_area">
+        <input type="button" class="other_button" value="一覧画面へ戻る"
+            onclick="location.href=`{{url_for('customer_coustomer_top'}}`">
+        {% if mode = 'get_ticket' %}
+        <input type="submit" formaction="{{ url_for('customer_coustomer_top', mode=mode) }}" class="go_next_button"
+            value="予約">
+        {% elif mode == 'delete_ticket' %}
+        <input type="submit" formaction="{{ url_for('customer_coustomer_top', mode=mode) }}" class="go_next_button"
+        value="削除">
+    </div>
+</div>
+{% endblock %}
