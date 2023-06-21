@@ -31,31 +31,6 @@
 
       <p>電話番号：</p>
       <p><input name="customer_phone" class="info" type="text" value="{{ customer_phone }}" readonly="readonly"></p>
-
-      <p>支払方法：</p>
-      <p class="radioButton">
-        {% if customer_payment == '0' %}
-        <input type="radio" name="customer_payment" value="1" disabled="disabled">
-        クレジットカード &nbsp;&nbsp;
-        <input type="radio" name="customer_payment" value="2" disabled="disabled">
-        キャッシュレス決済 &nbsp;&nbsp;
-        <input type="radio" name="customer_payment" value="0" checked="checked">
-        未選択
-        {% elif customer_payment == '1' %}
-        <input type="radio" name="customer_payment" value="1" checked="checked">
-        クレジットカード &nbsp;&nbsp;
-        <input type="radio" name="customer_payment" value="2" disabled="disabled">
-        キャッシュレス決済 &nbsp;&nbsp;
-        <input type="radio" name="customer_payment" value="0" disabled="disabled">
-        未選択
-        {% elif customer_payment == '2' %}
-        <input type="radio" name="customer_payment" value="1" disabled="disabled">
-        クレジットカード &nbsp;&nbsp;
-        <input type="radio" name="customer_payment" value="2" checked="checked">
-        キャッシュレス決済 &nbsp;&nbsp;
-        <input type="radio" name="customer_payment" value="0" disabled="disabled">
-        未選択
-        {% endif %}
       </p>
     </div>
 
