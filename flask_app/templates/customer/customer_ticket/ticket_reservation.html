@@ -15,15 +15,12 @@
 
 <!-- メインコンテンツ領域 -->
 <div class="event_inf">
-    <div class="event_name"> <!--イベント名-->
-        <h1>アルティメットイベント名</h1>
-    </div>
-    <div class="event_date"> <!--イベント日時-->
-        <h1>2023/5/2</h1>
-    </div>
-    <div class="event_state"> <!--イベント場所-->
-        <h1>東京ビックサイト</h1>
-    </div>
+    <p>予約内容は、以下の内容です。</p>
+    <h1>{{event.event_name}}</h1>
+    <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
+    <p>開催日：{{event.event_date}}</p>
+    <p>開催場所：{{event.event_place}}</p>
+
     <div id="button_area">
         <input type="button" class="other_button" value="一覧画面へ戻る"
             onclick="location.href=`{{url_for('customer_coustomer_top}}`">
