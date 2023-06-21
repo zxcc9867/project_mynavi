@@ -8,13 +8,15 @@
         <p class="menu">
             <a href="{{ url_for('show_customer_event_list') }}">イベんト一覧</a>
             >
-            <a href="{{ url_for('customer_manage_ticket') }}">チケット予約</a>
-            {% if mode == 'get_ticket' %}
+            <a href="{{ url_for('show_customer_reservation') }}">チケット予約</a>
+            <!-- {% if mode == 'get_ticket' %}  -->
             > チケット予約確認
+            <!--mode処理を行う場合は以下を復活-->
+            <!-- 
             {% elif mode == 'delete_ticket' %}
             > チケット削除確認
             {% endif %}
-
+            -->
         </p>
     </div>
 </nav>
@@ -22,10 +24,14 @@
 <!-- メインコンテンツ領域 -->
 <div class="event_inf">
     <div class="confirm_text_area">
+        <!--
         {% if mode = 'get_ticket' %}
+        -->
         <p>以下の内容でチケットを予約します。</p>
+        <!--
         {% elif mode == 'delete_ticket' %}
         <p>以下の内容でチケットを削除します。</p>
+        -->
     </div>
     <h1>{{event.event_name}}</h1>
     <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
@@ -52,13 +58,18 @@
     </form>
     <div id="button_area">
         <input type="button" class="other_button" value="一覧画面へ戻る"
-            onclick="location.href=`{{url_for('customer_coustomer_top'}}`">
-        {% if mode = 'get_ticket' %}
-        <input type="submit" formaction="{{ url_for('customer_top', mode=mode) }}" class="go_next_button"
-            value="予約">
-        {% elif mode == 'delete_ticket' %}
+            onclick="location.href=`{{url_for('show_customer_event_list'}}`">
+        <!--{% if mode = 'get_ticket' %} -->
+        <input type="submit" formaction="{{ url_for('show_customer_event_list') }}" class="go_next_button"
+            value="予約"> <!--url_for('~')の後に、mode実装するならばmode=mode を書き込む必要あり-->
+
+        <!--{% elif mode == 'delete_ticket' %} -->  
+        <!--  
         <input type="submit" formaction="{{ url_for('customer_top', mode=mode) }}" class="go_next_button"
             value="削除">
+        --> 
+        <!--url_for('~')の後に、mode実装するならばmode=mode を書き込む必要あり-->
+        
     </div>
 </div>
 {% endblock %}
