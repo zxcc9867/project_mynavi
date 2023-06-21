@@ -32,10 +32,5 @@ def show_customer_reservation(event_id): # detail.html => this_reservation.html
     event_category = read_event_category_one(event.event_category_id)
     return render_template('/customer/customer_ticket/ticket_reservation.html',event=event,event_category=event_category )
 
-@app.route("/mypage", methods=['GET','POST'])
-def show_mypage():
-    mypage_list = read_customer()
-    user_name = session.get('username','')
-    print(user_name)
-    return render_template('/customer/mypage/mypage_top.html',message = mypage_list)
+
 
