@@ -25,15 +25,15 @@
                   <th class="event_category_name">カテゴリ名</th>
                   <th class="action_button"></th>
                 </tr>
-                {% for event in events_yet %}
+                {% for event in events %}
                   <tr>
                     <form method="post">
-                      <td class="event_name">{{event.event_name}}</td>
-                      <td class="event_date">{{event.event_date}}</td>
-                      <td class="event_category_name"></td>
+                      <td class="event_name">{{event[0].event_name}}</td>
+                      <td class="event_date">{{event[0].event_date}}</td>
+                      <td class="event_category_name">{{event[1].event_category_name}}</td>
                       <td class="action_button">
                         <div>
-                          <a href="{{ url_for('show_customer_event_detail', event_id=event.event_id) }}" class="btn btn-success" style="margin: 0 auto;">詳細へ</a>
+                          <a href="{{ url_for('show_customer_event_detail', event_id=event[0].event_id) }}" class="btn btn-success" style="margin: 0 auto;">詳細へ</a>
                         </div>
                       </td>
                     </form>
