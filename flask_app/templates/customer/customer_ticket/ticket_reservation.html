@@ -1,0 +1,31 @@
+{% extends "layout_customer.html" %}
+{% block body %}
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/custmer/custmer.css">
+<!-- ナビゲーション領域 -->
+<nav>
+    <div class="container">
+        <p class="menu">
+            <a href="{{ url_for('show_customer_event_list') }}">イベント一覧</a>
+            >
+            チケット予約</a>
+        </p>
+    </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<div class="event_inf">
+    <p>予約内容は、以下の内容です。</p>
+    <h1>{{event.event_name}}</h1>
+    <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
+    <p>開催日：{{event.event_date}}</p>
+    <p>開催場所：{{event.event_place}}</p>
+
+    <div id="button_area">
+        <input type="button" class="other_button" value="一覧画面へ戻る"
+            onclick="location.href=`{{url_for('show_customer_event_list')}}`">
+        <input type="submit" formaction="{{ url_for('show_customer_event_list') }}" class="go_next_button"
+            value="確認画面へ">
+    </div>
+</div>
+{% endblock %}
