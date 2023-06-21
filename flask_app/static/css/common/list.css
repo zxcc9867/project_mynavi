@@ -25,7 +25,7 @@ ol {
 	width: 260px;
 }
 
-#list_area .event_place {
+#list_area .event_place .event_category_name {
 	width: 200px;
 }
 

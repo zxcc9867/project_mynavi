@@ -6,12 +6,13 @@ class Mst_customer(db.Model):
     customer_id = db.Column(db.Integer, primary_key=True,
                             autoincrement=True, unique=True)
     customer_account = db.Column(db.String(50))
-    customer_password = db.Column(db.String(10))
+    customer_password = db.Column(db.String(10))  # これを消す
+    # customer_password = db.Column(db.String(150)) を追加
     customer_name = db.Column(db.String(20))
     customer_zipcode = db.Column(db.String(7))
     customer_address = db.Column(db.String(50))
     customer_phone = db.Column(db.String(11))
-    customer_payment = db.Column(db.String(1))
+    customer_payment = db.Column(db.String(1))  # これを消す
 
     def __init__(
         self,
@@ -22,7 +23,7 @@ class Mst_customer(db.Model):
         customer_zipcode=None,
         customer_address=None,
         customer_phone=None,
-        customer_payment=None,
+        customer_payment=None,  # これを消す
     ):
         self.customer_id = customer_id
         self.customer_account = customer_account
@@ -31,7 +32,7 @@ class Mst_customer(db.Model):
         self.customer_zipcode = customer_zipcode
         self.customer_address = customer_address
         self.customer_phone = customer_phone
-        self.customer_payment = customer_payment
+        self.customer_payment = customer_payment  # これを消す
 
     def __repr__(self):
         return "<Mst_customer customer_id:{} customer_account:{} customer_password:{} customer_name:{} customer_zipcode:{} customer_address:{} customer_phone:{} customer_payment:{}>".format(
@@ -42,5 +43,10 @@ class Mst_customer(db.Model):
             self.customer_zipcode,
             self.customer_address,
             self.customer_phone,
-            self.customer_payment
-        )
+            self.customer_payment  # これを消す
+        )  # customer_payment:{} を消す
+
+# set FOREIGN_KEY_CHECKS=0;
+# drop table mst_customer
+# python manage.py init_db
+# set set FOREIGN_KEY_CHECKS=1;
