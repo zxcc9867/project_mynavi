@@ -46,5 +46,7 @@ class Mst_customer(db.Model):
             self.customer_payment  # これを消す
         )  # customer_payment:{} を消す
 
-# DROP TABLE {テーブル名} CASCADE CONSTRAINTS
+# set FOREIGN_KEY_CHECKS=0;
+# drop table mst_customer
 # python manage.py init_db
+# set set FOREIGN_KEY_CHECKS=1;
