@@ -10,7 +10,7 @@
   <form action="{{url_for('signup')}}" name="inputForm" method="post">
     <div id="form_area" class="base_pattern">
       <p>アカウント名：</p>
-      <p><input name="customer_account" class="info" type="text" value="{{ customer_account }}" readonly="readonly">
+      <p><input name="customer_account" class="info" type="email" value="{{ customer_account }}" readonly="readonly">
       </p>
 
       <p>パスワード<span class="required">（必須）</span>：</p>
