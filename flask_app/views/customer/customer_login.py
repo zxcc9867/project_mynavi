@@ -3,6 +3,7 @@ from flask_app.__init__ import app
 from flask_app.models.mst_customer import Mst_customer
 from flask_app.models.functions.customer import read_customer_customer_account
 from flask_app.__init__ import db
+# import hashlib  # この行を追加
 
 
 @app.route('/show_login', methods=['GET'])
@@ -12,7 +13,8 @@ def show_login():
 @app.route('/show_login/customer_login', methods=['GET','POST'])
 def customer_login():
     customer_account = request.form.get('customer_account')
-    customer_password = request.form.get('customer_password')
+    customer_password = request.form.get('customer_password')  # この行を削除
+    # customer_password = hashlib.query.with_entities(Mst_customer.customer_password).filter_by(customer_account=customer_account)  # この行を追加
     customer_password_tuple = Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_account=customer_account).first()
     customer_password_database = ''.join(customer_password_tuple[0])
     print(customer_password_database)
@@ -45,7 +47,7 @@ def show_signup():
 @app.route('/show_signup/confirm', methods=['POST'])
 def show_signup_confirm():
     customer_account = request.form.get('customer_account')
-    customer_password = request.form['customer_password']
+    customer_password = request.form.get('customer_password')
     customer_name = request.form.get('customer_name')
     customer_zipcode = request.form.get('customer_zipcode')
     customer_address = request.form.get('customer_address')
@@ -59,9 +61,11 @@ def show_signup_confirm():
 
 @app.route('/show_signup/signup', methods=['POST'])
 def signup():
+    # customer_password_hash = hashlib.sha256(request.form.get('customer_password').encode()).hexdigest()
     mst_customer = Mst_customer(
         customer_account = request.form.get('customer_account'),
-        customer_password = request.form.get('customer_password'),
+        customer_password = request.form.get('customer_password'), # この行を削除
+        # customer_password = customer_password_hash,  #この行を追加
         customer_name = request.form.get('customer_name'),
         customer_zipcode = request.form.get('customer_zipcode'),
         customer_address = request.form.get('customer_address'),
