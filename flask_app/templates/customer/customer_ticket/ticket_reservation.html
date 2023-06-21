@@ -6,9 +6,9 @@
 <nav>
     <div class="container">
         <p class="menu">
-            <a href="{{ url_for('customer_coustomer_top') }}">会員一覧</a>
+            <a href="{{ url_for('show_customer_event_list') }}">イベント一覧</a>
             >
-            <a href="{{ url_for('customer_manage_ticket') }}">チケット予約</a>
+            チケット予約</a>
         </p>
     </div>
 </nav>
@@ -23,8 +23,8 @@
 
     <div id="button_area">
         <input type="button" class="other_button" value="一覧画面へ戻る"
-            onclick="location.href=`{{url_for('customer_coustomer_top}}`">
-        <input type="submit" formaction="{{ url_for('customer_ticket_confirm', mode=mode) }}" class="go_next_button"
+            onclick="location.href=`{{url_for('show_customer_event_list')}}`">
+        <input type="submit" formaction="{{ url_for('show_customer_event_list') }}" class="go_next_button"
             value="確認画面へ">
     </div>
 </div>

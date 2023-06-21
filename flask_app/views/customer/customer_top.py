@@ -17,3 +17,11 @@ def show_customer_event_detail(event_id):
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
     return render_template('/customer/customer_event/detail.html', event=event, event_category=event_category)
+
+
+# Matsubara追記 ==>チケット予約機能遷移設定
+@app.route("/customer_event/detail/<int:event_id>/customer_reservation", methods =['GET','POST']) #customer
+def show_customer_reservation(event_id): # detail.html => this_reservation.html
+    event = read_event_one(event_id)
+    event_category = read_event_category_one(event.event_category_id)
+    return render_template('/customer/customer_ticket/ticket_reservation.html',event=event,event_category=event_category )
