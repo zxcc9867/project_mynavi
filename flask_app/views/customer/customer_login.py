@@ -11,9 +11,13 @@ def show_login():
 
 @app.route('/show_login/customer_login', methods=['GET','POST'])
 def customer_login():
-    print(Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=request.form.get('customer_account')).all())
-    if Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=request.form.get('customer_account')).all():
-        if Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_password=request.form.get('customer_password')).all():
+    customer_account = request.form.get('customer_account')
+    customer_password = request.form.get('customer_password')
+    customer_password_tuple = Mst_customer.query.with_entities(Mst_customer.customer_password).filter_by(customer_account=customer_account).first()
+    customer_password_database = ''.join(customer_password_tuple[0])
+    print(customer_password_database)
+    if Mst_customer.query.with_entities(Mst_customer.customer_account).filter_by(customer_account=customer_account).all():
+        if customer_password_database == customer_password:
             customer_array = read_customer_customer_account(request.form.get('customer_account'))
             customer = customer_array[0]
             session['logged_in_customer'] = True
