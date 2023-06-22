@@ -22,16 +22,12 @@
         <div id="output_list_table">
               <!-- ここに一覧表を表示する -->
 
-            <a href="">
-                <button type="button">
-                    変更する
-                </button>
+            <a href="{{url_for('show_customer_info_form', mode='update')}}" class="btn btn-primary">
+                変更する
             </a>
 
-            <a href="">
-                <button type="button">
-                    退会する
-                </button>
+            <a href="{{url_for('show_customer_info_form', mode='delete')}}" class="btn btn-primary">
+                退会する
             </a>
                <!-- 데이터들을 텍스트로 출력 ?? 테이블 형태가 아닌       -->
               <table border="1">

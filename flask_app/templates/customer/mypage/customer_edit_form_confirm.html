@@ -1,0 +1,50 @@
+{% extends "layout_customer.html" %}
+{% block body %}
+
+<main>
+    <h1>会員情報変更</h1>
+    <p>変更したい情報を記入してください。</p>
+    <form action="{{ url_for('customer_info_overwrite', mode=mode) }}" method="post">
+        
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{ customer.customer_id }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_account"  class="form-label">アカウント名</label>
+            <input type="text" class="form-control" id="customer_account" name="customer_account" value="{{ customer.customer_account }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="customer_password" name="customer_password" value="{{ customer.customer_password }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_name"  class="form-label">会員名</label>
+            <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ customer.customer_name }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_zipcode"  class="form-label">郵便番号</label>
+            <input type="text" class="form-control" id="customer_zipcode" name="customer_zipcode" value="{{ customer.customer_zipcode }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_address"  class="form-label">住所</label>
+            <input type="text" class="form-control" id="customer_address" name="customer_address" value="{{ customer.customer_address }}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_phone"  class="form-label">電話番号</label>
+            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ customer.customer_phone }}" readonly>
+        </div>
+        
+        <button type="submit" class="btn btn-secondary" name="button" value="cancel">キャンセル</button>
+        <button type="submit" class="btn btn-primary" name="button" value="confirm">確認</button>
+    </form>
+
+</main>    
+
+
+
+{% endblock %}
