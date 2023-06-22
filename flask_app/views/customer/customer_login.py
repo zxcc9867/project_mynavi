@@ -69,9 +69,11 @@ def customer_login():
 @is_customer_login
 def customer_logout():
     session.pop('logged_in_customer', None)
+    session.pop('logged_in_customer_account', None)
+    session.pop('logged_in_customer_id', None)
+    session.pop('logged_in_customer_name', None)
     flash('ログアウトしました')
     return redirect(url_for('show_customer_event_list'))
-
 
 ##### 以下サインアップ機能のルーティング #####
 

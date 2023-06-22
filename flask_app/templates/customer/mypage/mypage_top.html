@@ -1,76 +1,64 @@
 {% extends "layout_customer.html" %}
 {% block body %}
-
-<!-- 나중에 css 정의  -->
-<!-- <link rel="stylesheet" href="/static/css/staff/staff_customer_manage.css"> -->
-
-<!-- 태그를 설정 까지 함  -->
-
-
-
 <main>
     <div class="container">
-        <h1 id="main_title">
-          マイページ
-        </h1>
-    <div style="text-align: right;">
-        <button type="button" style="text-align: right; padding: 5px 10px; border: none; background-color: gray; color: white;">
-            一覧に戻る
-        </button>
+        <div style="display: flex;">
+            <h1 id="main_title">
+              マイページ
+            </h1>
+            <a href="{{url_for('show_customer_event_list')}}" class="btn btn-secondary" style="margin-top: 25px; margin-left: auto; height: 40px;">一覧に戻る</a>
+        </div>
+
+        <div>
+            <h2>アカウント情報</h2>
+            <div class="container">
+                <div class="base_pattern">
+                    <p>アカウント名（メールアドレス）：{{ current_customer.customer_account }}</p>
+                    <p>会員名：{{ current_customer.customer_name }}</p>
+                    <p>郵便番号：{{ current_customer.customer_zipcode }}</p>
+                    <p>住所：{{ current_customer.customer_address }}</p>
+                    <p>電話番号：{{ current_customer.customer_phone }}</p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <h2>チケット予約履歴</h2>
+            <div class="container">
+            <div id="list_area" class="base_pattern">
+                <div id="output_list_table">
+                  <!-- ここに一覧表を表示する -->
+                    <div id="">
+                      <table border="1">
+                        <tbody>
+                          <tr>
+                            <th class="event_name">イベント名</th>
+                            <th class="action_button"></th>
+                          </tr>
+                          {% for current_reserved_event_name in current_reserved_event_names %}
+                          <tr>
+                            <form method="post">
+                              <td class="event_name">{{current_reserved_event_name.event_name}}</td>
+                                <td class="action_button">
+                                  <div>
+                                    <a href="{{ url_for('show_customer_event_detail', event_id=event.event_id) }}" class="btn btn-danger" style="margin: 0 auto;">キャンセルする</a>
+                                  </div>
+                                </td>
+                              </form>
+                            </tr>
+                          {% else %}
+                          イベントデータが存在しません。
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="list_area" class="base_pattern">
-        <div id="output_list_table">
-              <!-- ここに一覧表を表示する -->
+</main>
 
-            <a href="">
-                <button type="button">
-                    変更する
-                </button>
-            </a>
-
-            <a href="">
-                <button type="button">
-                    退会する
-                </button>
-            </a>
-               <!-- 데이터들을 텍스트로 출력 ?? 테이블 형태가 아닌       -->
-              <table border="1">
-                <tbody>   
-                    <tr>
-                        <th class="customer_account">アカウント名</th>
-                        <th class="customer_name">名前</th>
-                        <th class="customer_zipcode">郵便番号</th>
-                        <th class="customer_address">住所</th>
-                        <th class="customer_phone">携帯電話番号</th>
-                        
-                        
-                    </tr>
-                   
-                    <tr>
-                        <form method="post">
-                 
-                     
-                        
-                        
-                  
-                        <td class="customer_account">{{customer_account}}</td> 
-                        <td class="customer_name">{{customer_name}}</td>
-                        <td class="customer_zipcode">{{customer_zipcode}}</td>
-                        <td class="customer_address">{{customer_address}}</td>
-                        <td class="customer_phone">{{customer_phone}}</td> 
-         
-                  </tr>
-                  </form>
-                
-            
-          </div>
-        </tr>
-       
-       
-        </tbody>
-        </table>
-        </div>
-        </div>
-    </main>
-    
-    {% endblock %}
+{% endblock %}
