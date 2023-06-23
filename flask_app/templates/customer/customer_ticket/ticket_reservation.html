@@ -3,27 +3,27 @@
 <!-- 機能共用 CSS -->
 <link rel="stylesheet" href="/static/css/custmer/custmer.css">
 <!-- ナビゲーション領域 -->
-<nav>
-    <div class="container">
+<div class="container">
+    <nav>
         <p class="menu">
             <a href="{{ url_for('show_customer_event_list') }}">イベント一覧</a>
-            >
-            チケット予約</a>
+            > <a href="{{ url_for('show_customer_event_detail', event_id=event.event_id)}}">詳細</a>
+            > 予約ページ
         </p>
-    </div>
-</nav>
-
-<!-- メインコンテンツ領域 -->
-<div class="event_inf">
-    <p>予約内容は、以下の内容です。</p>
-    <h1>{{event.event_name}}</h1>
-    <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
-    <p>開催日：{{event.event_date}}</p>
-    <p>開催場所：{{event.event_place}}</p>
-
-    <div id="button_area">
-        <a href="{{url_for('show_customer_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
-        <a href="{{url_for('show_customer_event_list')}}" class="btn btn-success">確認する</a>
+    </nav>
+    
+    <!-- メインコンテンツ領域 -->
+    <h3>予約内容は、以下の内容です。</h3>
+    <div class="event_inf base_pattern">
+        <h1>{{event.event_name}}</h1>
+        <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
+        <p>開催日：{{event.event_date}}</p>
+        <p>開催場所：{{event.event_place}}</p>
+    
+        <div id="button_area">
+            <a href="{{url_for('show_customer_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
+            <a href="{{url_for('show_customer_event_list')}}" class="btn btn-success">確認する</a>
+        </div>
     </div>
 </div>
 {% endblock %}
