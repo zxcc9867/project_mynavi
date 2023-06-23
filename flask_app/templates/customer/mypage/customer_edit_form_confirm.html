@@ -4,7 +4,9 @@
 <main>
     <h1>会員情報変更</h1>
     <p>変更したい情報を記入してください。</p>
-    <form>
+
+    <form action="{{ url_for('customer_info_overwrite', mode=mode) }}" method="post">
+
         
         <div class="form-group">
             <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{ customer.customer_id }}" readonly>
@@ -39,8 +41,11 @@
             <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ customer.customer_phone }}" readonly>
         </div>
         
-        <button>キャンセル</button>
-        <button type="submit">確認</button>
+
+        <button type="submit" class="btn btn-secondary" name="button" value="cancel">キャンセル</button>
+        <button type="submit" class="btn btn-primary" name="button" value="confirm">確認</button>
+
+
     </form>
 
 </main>    

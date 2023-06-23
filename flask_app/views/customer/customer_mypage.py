@@ -32,9 +32,10 @@ def show_customer_info_form(mode:str):
     """
     会員情報のフォーム
     modeによって表示する内容を若干変更する。
+    残りの実装内容：無し
     """
-    request_customer_id = session['logged_in_customer_id']
-    customer = read_customer_one(request_customer_id)
+    current_customer_id = session['logged_in_customer_id']
+    customer = read_customer_one(current_customer_id)
     if mode == 'update':
         return render_template('/customer/mypage/customer_edit_form.html', customer=customer, mode=mode)
     if mode == 'delete':
@@ -44,25 +45,45 @@ def show_customer_info_form(mode:str):
 @app.route("/mypage/<string:mode>/confirm", methods=['POST'])
 def show_customer_info_form_confirm(mode:str):
     """
+    キャンセルボタンが押された場合は問答無用でshow_mypageに遷移する
     会員情報の確認画面を表示する。
     modeによって表示する内容を変える。
+    残りの実装内容：
+    ・UPD: バリデーション
+    ・DEL: 無し
     """
+    if request.form.get("button") == "cancel":
+        return redirect(url_for('show_mypage'))
+    
     if mode == 'update':
-        
-        return render_template('/customer/mypage/customer_edit_form_confirm.html', customer=customer, mode=mode)
+        """
+        バリデーションチェックするための関数が欲しい
+        """
+        return "未実装:confirm/upd"
     if mode == 'delete':
-        request_customer_id = request.form.get('customer_id')
-        customer = read_customer_one(request_customer_id)
-        return render_template('/customer/mypage/customer_delete_form_confirm.html', customer=customer, mode=mode)
+        current_customer_id = request.form.get('customer_id')
+        current_customer = read_customer_one(current_customer_id)
+        return render_template('/customer/mypage/customer_delete_form_confirm.html', customer=current_customer, mode=mode)
 
 @app.route("/mypage/<string:mode>/overwrite", methods=['POST'])
 def customer_info_overwrite(mode:str):
     """
+    キャンセルボタンが押された場合は問答無用でshow_mypageに遷移する
     渡されたmodeに応じて以下のように処理する。
     update:会員IDを受け取った情報で置き換える。パスワードだけは特殊な処理が必要。
     delete:会員IDを取得。取得した会員ID情報を基に、DBから会員情報を取得。取得した会員情報を削除する。
+
+    懸念事項:予約が残っている状態で退会は可能か？
+    残りの実装内容:
+    UPD: マージ処理
+    DEL: 削除処理+確認
     """
-    print(request)
+    if request.form.get("button") == "cancel":
+        return redirect(url_for('show_mypage'))
+    if mode=='update':
+        return '未実装:overwrite/upd'
+    if mode=='delete':
+        return '未実装:overwrite/del'
     return ('未実装です')
     request_customer_id = request.form.get('customer_id')
     customer = read_customer_one(request_customer_id)
