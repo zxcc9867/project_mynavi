@@ -22,10 +22,8 @@
     <p>開催場所：{{event.event_place}}</p>
 
     <div id="button_area">
-        <input type="button" class="other_button" value="一覧画面へ戻る"
-            onclick="location.href=`{{url_for('show_customer_event_list')}}`">
-        <input type="submit" formaction="{{ url_for('show_customer_event_list') }}" class="go_next_button"
-            value="確認画面へ">
+        <a href="{{url_for('show_customer_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
+        <a href="{{url_for('show_customer_event_list')}}" class="btn btn-success">確認する</a>
     </div>
 </div>
 {% endblock %}

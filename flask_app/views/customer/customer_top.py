@@ -10,7 +10,12 @@ from flask_app.views.staff.common.staff_common import is_staff_login
 @app.route("/show_customer_event_list", methods=['GET','POST'])
 def show_customer_event_list():
     events_yet, events_done = read_event_with_date()
-    return render_template('/customer/customer_event/customer_top.html', events_yet=events_yet, events_done=events_done)
+    events = []
+    for event in events_yet:
+        event_category_name = read_event_category_one(event.event_category_id)
+        event_information = (event, event_category_name)
+        events.append(event_information)
+    return render_template('/customer/customer_event/customer_top.html', events=events)
 
 @app.route("/customer_event/detail/<int:event_id>", methods=['GET','POST'])
 def show_customer_event_detail(event_id):
@@ -21,7 +26,7 @@ def show_customer_event_detail(event_id):
 
 
 # Matsubara追記 ==>チケット予約機能遷移設定
-@app.route("/customer_event/detail/<int:event_id>/customer_reservation", methods =['GET','POST']) #customer
+@app.route("/customer_event/detail/<int:event_id>/reservation", methods =['GET','POST']) #customer
 def show_customer_reservation(event_id): # detail.html => this_reservation.html
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)

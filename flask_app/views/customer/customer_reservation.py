@@ -10,8 +10,7 @@ from flask_app.views.staff.common.staff_common import is_staff_login
 
 
 # this_reservation.html から confirm.html へ遷移する処理
-@is_staff_login
-@app.route("/show_customer_ticket_confirm" ,methods =['POST'])
+@app.route("customer_event/detail/<int:event_id>/reservation/comfirm" ,methods =['GET','POST'])
 def show_customer_ticket_confirm(event_id): # this_reservation.html => confirm.html
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
@@ -21,5 +20,5 @@ def show_customer_ticket_confirm(event_id): # this_reservation.html => confirm.h
     customer_zipcode = request.form.get('customer_zipcode')
     customer_address = request.form.get('customer_address')
     customer_phone = request.form.get('customer_phone')
-    customer_payment = request.form.get('customer_payment')
-    return render_template('/customer/customer_event/confirm.html',event =event,event_category=event_category,customer_account=customer_account,customer_password=customer_password,customer_name=customer_name,customer_zipcode=customer_zipcode,customer_address=customer_address,customer_phone=customer_phone )
+
+    return render_template('/customer/customer_event/confirm.html',event=event,event_category=event_category,customer_account=customer_account,customer_password=customer_password,customer_name=customer_name,customer_zipcode=customer_zipcode,customer_address=customer_address,customer_phone=customer_phone )

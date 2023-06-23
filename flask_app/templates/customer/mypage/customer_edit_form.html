@@ -5,6 +5,7 @@
     <h1>会員情報変更</h1>
     <p>変更したい情報を記入してください。</p>
     <form action="{{ url_for('show_customer_info_form_confirm', mode=mode) }}" method="post">
+
         
         <div class="form-group">
             <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{ customer.customer_id }}">
@@ -40,8 +41,10 @@
             <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ customer.customer_phone }}">
         </div>
         
+
         <button type="submit" class="btn btn-secondary" name="button" value="cancel">キャンセル</button>
         <button type="submit" class="btn btn-primary" name="button" value="confirm">確認</button>
+
     </form>
 
 </main>    

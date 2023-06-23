@@ -5,17 +5,29 @@ from flask_app.messages import ErrorMessages, InfoMessages
 from flask_app.models.functions.customer import delete_customer, read_customer, read_customer_one, update_customer
 from flask_app.models.functions.event_category import create_event_category, read_event_category, read_event_category_one, read_event_category_category_name
 from flask_app.models.functions.event import create_event, read_event, read_event_one, read_event_event_category, update_event, delete_event, read_event_with_date
+from flask_app.models.functions.reservations import read_reservation_customer_id
+from flask_app.models.functions.ticket import read_ticket_one
 from flask_app.views.staff.common.staff_common import is_staff_login
+from flask_app.views.customer.common.customer_common import is_customer_login
 from hashlib import sha256
 
 @app.route("/mypage", methods=['GET','POST'])
+@is_customer_login
 def show_mypage():
-    mypage_list = read_customer()
-    user_name = session.get('username','')
-    print(user_name)
-    return render_template('/customer/mypage/mypage_top.html',message = mypage_list)
+    current_customer_id = session['logged_in_customer_id']
+    current_customer = read_customer_one(current_customer_id)
+    current_ticket_reservations = read_reservation_customer_id(current_customer_id)
+    current_reserved_event_names = []
+    for current_ticket_reservation in current_ticket_reservations:
+        current_ticket_id = current_ticket_reservation.ticket_id
+        current_event_id = read_ticket_one(current_ticket_id).event_id
+        current_reserved_event_name = read_event_one(current_event_id).event_name
+        current_reserved_event_names.append(current_reserved_event_name)
+        print(current_reserved_event_name)
+    return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_ticket_reservations=current_ticket_reservations, current_reserved_event_names=current_reserved_event_names)
 
 @app.route("/mypage/customer_info/<string:mode>", methods=['GET', 'POST'])
+@is_customer_login
 def show_customer_info_form(mode:str):
     """
     会員情報のフォーム
