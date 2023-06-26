@@ -51,6 +51,9 @@ class ErrorMessages:
 
     def w17(self):
         return '予約済みのチケットがある場合は退会できません。'
+    
+    def w18(self, arg1, arg2):
+        return '{}は{}である必要があります'.format(arg1, arg2)
 
 
 class InfoMessages:
