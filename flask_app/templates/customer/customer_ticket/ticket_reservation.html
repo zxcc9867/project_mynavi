@@ -3,12 +3,12 @@
 <!-- 機能共用 CSS -->
 <link rel="stylesheet" href="/static/css/custmer/custmer.css">
 <!-- ナビゲーション領域 -->
-<nav>
-    <div class="container">
+<div class="container">
+    <nav>
         <p class="menu">
             <a href="{{ url_for('show_customer_event_list') }}">イベント一覧</a>
-            >
-            チケット予約</a>
+            > <a href="{{ url_for('show_customer_event_detail', event_id=event.event_id)}}">詳細</a>
+            > 予約ページ
         </p>
     </div>
 </nav>
