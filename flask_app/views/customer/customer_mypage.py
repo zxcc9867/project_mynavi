@@ -28,10 +28,10 @@ def show_mypage():
     어카운트 명, 패스워드 , 이름, 우편 번호, 주소, 휴대폰 번호 
     """
     current_ticket_reservations = read_reservation_customer_id(current_customer_id)
-    print(f"예약된 티켓 정보:{current_ticket_reservations}")
     """
-    read_reservation_customer_id(current_customer_id)를 통해, 현재 로그인한 사람의 id를 불러와서
-    예약 테이블의 고객 id와 비교한다. 그리고 있다면, 그것을 들고온다. 없으면 None
+    read_reservation_customer_id를 통해, tbl_reservation 테이블에서 저장되어 있는 고객 id와 
+    현재 로그인한 고객의 id와 비교해서 일치하는 것을 출력한다. 
+    출력결과 -> 예약된 티켓 정보:[<Tbl_reservation reservation_id:106 ticket_id:306 customer_id:1>]
     """
     current_reserved_events = []
     for current_ticket_reservation in current_ticket_reservations:
@@ -58,16 +58,27 @@ def show_mypage():
         출력 결과 -> 현재 예약된 이벤트 :<Mst_event event_id:2 event_category_id:1 event_name:bts live event_date:20230630 event_place:seoul event_overview:bts>
         """
         current_reservation_id = current_ticket_reservation.reservation_id
+        """
+        Tbl_reservation 테이블의 reservation_id:106 값을 들고옴.  
+        """
         print(f"현재 예약된 이벤트 id : {current_reservation_id}")
         current_reservation_info = (current_reserved_event, current_reservation_id)
-        current_reserved_events.append(current_reservation_info)
-
         """
-        현재 예약된 
+        현재 예약된 이벤트의 정보와 id를 넣는다. 
+        """
+        current_reserved_events.append(current_reservation_info)
+        print(f"예약된 정보 {current_reserved_events}")
+        """
+        현재 예약된 정보 출력 :
+
+        [(<Mst_event event_id:2 event_category_id:1 event_name:bts live event_date:20230630 event_place:seoul event_overview:bts>, 107)]
         """
         # print(current_reservation_id)
         # print(current_reservation_info)
     return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_reserved_events=current_reserved_events)
+    """
+    현재의 로그인 한 사람의 정보와 로그인한 사람이 예약한 이벤트의 정보를 전달한다. 
+    """
 
 @app.route("/mypage/customer_info/<string:mode>", methods=['GET', 'POST'])
 @is_customer_login
@@ -81,12 +92,17 @@ def show_customer_info_form(mode:str):
     info_messages = InfoMessages()
     error_messages = ErrorMessages()
     customer = read_customer_one(current_customer_id)
+    """
+    현재 로그인 한 사용자의 id를 가지고 customer에 불러온다. -> 현재 사용자의 id, 어카운트, 패스워드 등등 
+    """
     if mode == 'update':
         return render_template('/customer/mypage/customer_edit_form.html', customer=customer, mode=mode)
     if mode == 'delete':
         """
         予約履歴の確認
         """
+
+
         reserved_event = read_reservation_customer_id(current_customer_id)
         if reserved_event:
             flash(error_messages.w17())
@@ -106,12 +122,33 @@ def show_customer_info_form_confirm(mode:str):
     ・DEL: 無
     """
 
+    """
+    회원 정보 변경에서 입력한 데이터를 가지고 일로옴. 
+    """
+
     if request.form.get("button") == "cancel":
+        """
+        <button type="submit" class="btn btn-secondary" name="button" value="cancel">キャンセル</button>
+        위의 html에서 눌러진 버튼의 value가 cancel일 때, 이 if문이 실행됨. 
+        """
         return redirect(url_for('show_mypage'))
+        """
+        캔슬 버튼이 눌러졌으면, 마이페이지 화면으로 돌아감. 
+        """
     
     if mode == 'update':
+        """
+        만약, mode가 업데이트라면, 회원의 정보를 변경한다. 
+        """
         current_customer_id = request.form.get('customer_id')
+        """
+        회원 정보 변경 입력폼에 입력한 값을 들고오지만, customer_id는 
+        현재의 로그인한 고객의 id가 자동으로 들어가있는 것으로, 유저가 입력한 것은 아님. 
+        """
         current_customer = read_customer_one(current_customer_id)
+        """
+        현재의 고객 아이디를 읽어서, 현재 로그인한 고객의 모든 정보를 들고온다. 
+        """
         """
         バリデーションチェックするための関数が欲しい→実装した
         """
@@ -209,6 +246,9 @@ def customer_info_validate(request) -> list:
 
     if account == '':
         messages.append(errorMessages.w02('アカウント名'))
+        """
+        아무것도 입력 안했을 때, 필수항목이라는 에러가 출력된다. 
+        """
     elif not re.fullmatch("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", account):
         messages.append(errorMessages.w18('アカウント名', 'メールアドレス'))
     else:
@@ -218,6 +258,10 @@ def customer_info_validate(request) -> list:
                 continue
             else:
                 messages.append(errorMessages.w03('アカウント名'))
+                """
+                'この' + arg1 + 'は既に使われています。' 이 '어카운트명'은 이미 사용되고 있습니다. 
+                """
+                
 
     """
     パスワードのバリデーションチェック。
