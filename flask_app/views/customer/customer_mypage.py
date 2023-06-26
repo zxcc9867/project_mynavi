@@ -88,7 +88,8 @@ def show_customer_info_form_confirm(mode:str):
             print(session["customer_info"])
             return render_template('/customer/mypage/customer_edit_form_confirm.html', mode=mode, req=session["customer_info"]) 
     if mode == 'delete':
-
+        current_customer_id = session.get('logged_in_customer_id')
+        current_customer = read_customer_one(current_customer_id)
         return render_template('/customer/mypage/customer_delete_form_confirm.html', customer=current_customer, mode=mode)
 
 @app.route("/mypage/<string:mode>/overwrite", methods=['POST'])
