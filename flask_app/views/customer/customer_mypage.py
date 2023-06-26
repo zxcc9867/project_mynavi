@@ -130,7 +130,7 @@ def customer_info_overwrite(mode:str):
         session['logged_in_customer_account'] = current_customer.customer_account
         session['logged_in_customer_id'] = current_customer.customer_id
         session['logged_in_customer_name'] = current_customer.customer_name
-        flash(infoMessage.i03('会員情報'))
+        flash(infoMessage.i02('会員情報'))
         return redirect(url_for('show_mypage'))
     if mode=='delete': 
         for key in list(session.keys()):
