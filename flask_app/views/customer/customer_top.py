@@ -8,6 +8,7 @@ from flask_app.models.functions.customer import delete_customer, read_customer, 
 from flask_app.models.functions.event_category import create_event_category, read_event_category, read_event_category_one, read_event_category_category_name
 from flask_app.models.functions.event import create_event, read_event, read_event_one, read_event_event_category, update_event, delete_event, read_event_with_date
 from flask_app.views.staff.common.staff_common import is_staff_login
+from flask_app.views.customer.common.customer_common import is_customer_login
 
 @app.route("/show_customer_event_list", methods=['GET','POST'])
 def show_customer_event_list():
@@ -29,6 +30,7 @@ def show_customer_event_detail(event_id):
 
 # Matsubara追記 ==>チケット予約機能遷移設定
 @app.route("/customer_event/detail/<int:event_id>/reservation", methods =['GET','POST']) #customer
+@is_customer_login
 def show_customer_reservation(event_id): # detail.html => this_reservation.html
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
