@@ -4,19 +4,19 @@
     <div class="container">
         <nav>
             <p class="menu">
-                <a href="{{ url_for('show_customer_event_list') }}">イベント一覧</a>
-                ><a> 詳細</a>
+                <a href="{{ url_for('show_mypage') }}">マイページ</a>
+                ><a> 削除確認</a>
             </p>
         </nav>
+        <h3>以下の内容を削除しますがよろしいですか？</h3>
         <div class="base_pattern">
             <h1 id="main_title">{{event.event_name}}</h1>
-            <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
             <p>開催日：{{event.event_date}}</p>
             <p>開催場所：{{event.event_place}}</p>
             <p>概要：<br>{{event.event_overview}}</p>
         
-            <a href="{{url_for('show_customer_event_list')}}" class="btn btn-secondary">一覧に戻る</a>
-            <a href="{{url_for('show_customer_reservation',event_id=event.event_id)}}" class="btn btn-success">予約する</a>
+            <a href="{{ url_for('show_mypage') }}" class="btn btn-secondary">マイページへ</a>
+            <a href="{{ url_for('delete_reservation_ticket', current_reservation_id=current_reservation_id)}}" class="btn btn-danger">キャンセルする</a>
         </div>
     </div>
 

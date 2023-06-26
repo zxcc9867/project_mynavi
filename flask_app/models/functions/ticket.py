@@ -13,7 +13,8 @@ def create_ticket(request):
     db.session.add(mst_ticket)
     db.session.commit()
 
-    return
+    ticket_id = mst_ticket.ticket_id
+    return ticket_id
 
 
 # チケット　一覧取得
