@@ -35,35 +35,32 @@ def show_customer_reservation(event_id): # detail.html => this_reservation.html
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
     ticket_id = Mst_ticket.query.with_entities(Mst_ticket.ticket_id).filter_by(event_id=event.event_id).all()
-    # print(ticket_id[0])
     if not ticket_id:
-        flash('not ticket_id')
-        return render_template('/customer/customer_ticket/ticket_reservation.html',event=event,event_category=event_category )
+        return render_template('/customer/customer_ticket/ticket_reservation.html',event=event,event_category=event_category)
     else:
-        # print(ticket_id)
         current_customer_id = session['logged_in_customer_id']
         ticket_id = Mst_ticket.query.with_entities(Mst_ticket.ticket_id).filter_by(event_id=event.event_id).all()
         print(ticket_id)
-        reserved_ticket = []
-        not_reserved_ticket = []
-        for ticket in ticket_id:
-            ticket = ticket[0]
-            print(ticket)
-            print(Tbl_reservation.query.filter_by(customer_id=current_customer_id, ticket_id=ticket).all())
-            if Tbl_reservation.query.filter_by(customer_id=current_customer_id, ticket_id=ticket).all():
-                reserved_ticket.append(ticket)
+        reserved_ticket = []  # 予約済みの場合のチケットidを格納するリスト
+        not_reserved_ticket = []  # まだ予約していない場合のチケットidを格納するリスト
+        for ticket in ticket_id:  # 一つのイベントidに紐づいているチケットidを、１つずつ取り出す
+            ticket = ticket[0]  # １つのチケットidのタプルを取り出す
+            # print(ticket)
+            # print(Tbl_reservation.query.filter_by(customer_id=current_customer_id, ticket_id=ticket).all())
+            if Tbl_reservation.query.filter_by(customer_id=current_customer_id, ticket_id=ticket).all():  # tbl_reservationで、customer_idとticket_idが一致するレコードを抽出
+                reserved_ticket.append(ticket)  # ticket_idを、現在のログインしているcustomerが予約しているとreserved_ticketに格納
         # print(Tbl_reservation.query.filter_by(ticket_id='1').all())
         # print(Tbl_reservation.query.filter_by(customer_id=customer_id).all())
         # if Tbl_reservation.query.filter_by(ticket_id=ticket_id[0]).all() and Tbl_reservation.query.filter_by(customer_id=customer_id).all():
         #     flash('このイベントは予約済みです')
         #     return redirect(url_for('show_customer_event_list'))
             else:
-                not_reserved_ticket.append(ticket)
+                not_reserved_ticket.append(ticket)  # ticket_idを、現在のログインしているcustomerが予約していないとnot_reserved_ticketに格納
 
-            
+        
+        # 予約済みかそうでないかで処理を分ける
         if len(reserved_ticket) == 0:
-            flash('if Tbl_reservation.query.filter_by(customer_id=current_customer_id, ticket_id=ticket).all():のelse:')
-            return render_template('/customer/customer_ticket/ticket_reservation.html',event=event,event_category=event_category )
+            return render_template('/customer/customer_ticket/ticket_reservation.html',event=event,event_category=event_category)
         else:
             flash('このイベントは予約済みです')
             return redirect(url_for('show_customer_event_list'))
