@@ -18,18 +18,55 @@ from hashlib import sha256
 @is_customer_login
 def show_mypage():
     current_customer_id = session['logged_in_customer_id']
+    """
+    session 상에 로그인되어 있는 고객 아이디를 읽어 온다. 
+    """
     current_customer = read_customer_one(current_customer_id)
+    """
+    현재 로그인 된 고객의 정보를 커스터머 테이블에서 들고온다. 
+    mst_customer의 형식 
+    어카운트 명, 패스워드 , 이름, 우편 번호, 주소, 휴대폰 번호 
+    """
     current_ticket_reservations = read_reservation_customer_id(current_customer_id)
+    print(f"예약된 티켓 정보:{current_ticket_reservations}")
+    """
+    read_reservation_customer_id(current_customer_id)를 통해, 현재 로그인한 사람의 id를 불러와서
+    예약 테이블의 고객 id와 비교한다. 그리고 있다면, 그것을 들고온다. 없으면 None
+    """
     current_reserved_events = []
     for current_ticket_reservation in current_ticket_reservations:
         current_ticket_id = current_ticket_reservation.ticket_id
+        """
+        current_ticket_id = current_ticket_reservation.ticket_id 코드는 
+        위의 과정에서 현재 로그인한 사람과 예약 내역이 일치한 것을 확인했으므로, 
+        예약 테이블에서 예약된 사람과 티켓 id , 예약 id 같은 것을 불러온다. 
+        """
         current_event_id = read_ticket_one(current_ticket_id).event_id
+        """
+        현재 로그인 한 사람으로 예약된 티켓 id를 들고와서, 티켓 테이블의 모든 행을 출력한다. 
+        그리고 출력된 행 중에서 event_id의 속성 값을 현재 이벤트 id로 저장한다.
+        """
         current_reserved_event= read_event_one(current_event_id)
+        
+        """
+        한 개의 이벤트를 출력한다. -> 현재 티켓에 해당되는 이벤트 id를 들고가서, 
+        해당되는 이벤트의 내용을 출력한다.  
+        
+        """
+        """
+        print(f"현재 예약된 이벤트 :{current_reserved_event}")
+        출력 결과 -> 현재 예약된 이벤트 :<Mst_event event_id:2 event_category_id:1 event_name:bts live event_date:20230630 event_place:seoul event_overview:bts>
+        """
         current_reservation_id = current_ticket_reservation.reservation_id
+        print(f"현재 예약된 이벤트 id : {current_reservation_id}")
         current_reservation_info = (current_reserved_event, current_reservation_id)
         current_reserved_events.append(current_reservation_info)
-        print(current_reservation_id)
-        print(current_reservation_info)
+
+        """
+        현재 예약된 
+        """
+        # print(current_reservation_id)
+        # print(current_reservation_info)
     return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_reserved_events=current_reserved_events)
 
 @app.route("/mypage/customer_info/<string:mode>", methods=['GET', 'POST'])
