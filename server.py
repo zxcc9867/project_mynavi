@@ -13,6 +13,7 @@ import flask_app.views.customer.customer_top
 import flask_app.views.customer.customer_login
 import flask_app.views.customer.customer_mypage
 import flask_app.views.customer.customer_ticket_delete
+import flask_app.views.customer.customer_reservation
 
 
 app.secret_key = 'hoge'
