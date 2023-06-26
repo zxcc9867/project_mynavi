@@ -47,13 +47,10 @@
                           {% for current_reserved_event in current_reserved_events %}
                           <tr>
                             <form method="post">
-                              <td class="event_name">{{current_reserved_event.event_name}}</td>
+                              <td class="event_name">{{current_reserved_event[0].event_name}}</td>
                                 <td class="action_button">
                                   <div>
-
-                                   
-                                    <a href="{{url_for('show_customer_ticket_delete_confirm', event_id=current_reserved_event.event_id)}}" class="btn btn-danger">キャンセルする</a>
-
+                                    <a href="{{url_for('show_customer_ticket_delete_confirm', event_id=current_reserved_event[0].event_id, current_reservation_id=current_reserved_event[1])}}" class="btn btn-danger">キャンセルする</a>
                                   </div>
                                 </td>
                               </form>
