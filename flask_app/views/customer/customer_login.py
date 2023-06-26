@@ -7,6 +7,7 @@ import hashlib  # この行を追加
 import unicodedata
 from flask_app.views.customer.common.customer_common import is_customer_login
 
+
 # def customer_validation():
 #     if request.form.get('customer_account') == '':
 #         flash('アカウント名を入力してください')
@@ -57,7 +58,10 @@ def customer_login():
             session['logged_in_customer_id'] = customer.customer_id
             session['logged_in_customer_name'] = customer.customer_name
             flash('ログインしました')
-            return redirect(url_for('show_customer_event_list'))
+            if not session['event_id']:
+                return redirect(url_for('show_customer_event_list'))
+            else:
+                return redirect(url_for('show_customer_reservation', event_id=session['event_id']))
         else:
             flash('アカウント名またはパスワードが違います')
             return render_template('/customer/customer_login/customer_login.html')

@@ -24,6 +24,7 @@ def show_customer_event_list():
 def show_customer_event_detail(event_id):
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
+    session['event_id'] = event_id
     return render_template('/customer/customer_event/detail.html', event=event, event_category=event_category)
 
 
@@ -32,6 +33,7 @@ def show_customer_event_detail(event_id):
 @app.route("/customer_event/detail/<int:event_id>/reservation", methods =['GET','POST']) #customer
 @is_customer_login
 def show_customer_reservation(event_id): # detail.html => this_reservation.html
+    session.pop('event_id', None)
     event = read_event_one(event_id)
     event_category = read_event_category_one(event.event_category_id)
     ticket_id = Mst_ticket.query.with_entities(Mst_ticket.ticket_id).filter_by(event_id=event.event_id).all()
