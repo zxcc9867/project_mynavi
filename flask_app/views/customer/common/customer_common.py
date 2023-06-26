@@ -9,6 +9,6 @@ def is_customer_login(view):
     def inner(*args, **kwargs):
         # ユーザーとしてログインしていない場合はユーザーログインページに遷移させる
         if not session.get('logged_in_customer') or not read_customer_one(session.get('logged_in_customer_id')):
-            return redirect(url_for("show_login"))
+            return redirect(url_for("show_customer_event_list"))
         return view(*args, **kwargs)
     return inner

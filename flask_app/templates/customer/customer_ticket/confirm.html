@@ -1,0 +1,56 @@
+{% extends "layout_customer.html" %}
+{% block body %}
+<!-- 機能共用 CSS -->
+<link rel="stylesheet" href="/static/css/custmer/custmer.css">
+<!-- ナビゲーション領域 -->
+<nav>
+    <div class="container">
+        <p class="menu">
+            <a href="{{ url_for('show_customer_event_list') }}">イベント一覧</a>
+            >
+            <a href="{{ url_for('show_customer_reservation', event_id=event.event_id) }}">チケット予約</a>
+            > チケット予約確認
+        </p>
+    </div>
+</nav>
+
+<!-- メインコンテンツ領域 -->
+<div class="event_inf">
+    <div class="confirm_text_area">
+        <p>以下の内容でチケットを予約します。</p>
+    </div>
+    <h1>{{event.event_name}}</h1>
+    <p>イベントカテゴリ：{{event_category.event_category_name}}</p>
+    <p>開催日：{{event.event_date}}</p>
+    <p>開催場所：{{event.event_place}}</p>
+    <form method="post" action="{{ url_for('ticket_reserve') }}">
+        <div class="form-group">
+            <label>アカウント名：</label>
+            <input class="form-control" name="customer_account" type="text" value="{{customer_account}}" disabled>
+            <br>
+            <label>ユーザー名</label>
+            <input class="form-control" name="customer_name" type="text" value="{{customer_name}}" disabled>
+            <br>
+            <label>郵便番号</label>
+            <input class="form-control" name="customer_zipcode" type="tel" value ="{{customer_zipcode}}" disabled>
+            <br>
+            <label>住所</label>
+            <input class="form-control" name="customer_address" type="text" value ="{{customer_address}}" disabled>
+            <br>
+            <label>電話番号：</label>
+            <input class="form-control" name="customer_phone" type="tel" value ="{{customer_phone}}" disabled>
+            <input class="form-control" name="customer_id" type="hidden" value="{{customer_id}}">
+            <input class="form-control" name="event_id" type="hidden" value="{{event.event_id}}">
+            <input class="form-control" name="ticket_seat_id" type="hidden" value="1">
+            <input class="form-control" name="ticket_price" type="hidden" value="0">
+            <input class="form-control" name="ticket_accept" type="hidden" value="0">
+        <div id="button_area" style="margin-bottom:60px;">
+            <input type="button" class="other_button" value="一覧画面へ戻る"
+                onclick="location.href=`{{url_for('show_customer_event_list')}}`">
+        
+            <input type="submit" class="go_next_button"
+                value="予約"> 
+        </div>
+    </form>
+</div>
+{% endblock %}

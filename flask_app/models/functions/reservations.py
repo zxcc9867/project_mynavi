@@ -7,10 +7,10 @@ from flask_app.models.functions.ticket import convert_seat_id, read_ticket_one
 
 
 # 予約　新規登録
-def create_reservation(request):
+def create_reservation(request, ticket_id):
     tbl_reservation = Tbl_reservation(
         customer_id=request.form["customer_id"],
-        ticket_id=request.form["ticket_id"],
+        ticket_id=ticket_id,
     )
 
     db.session.add(tbl_reservation)
