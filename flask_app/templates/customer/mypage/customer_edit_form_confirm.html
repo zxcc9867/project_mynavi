@@ -9,36 +9,37 @@
 
         
         <div class="form-group">
-            <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{ customer.customer_id }}" readonly>
+            <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{req['customer_id']}}" readonly>
         </div>
 
         <div class="form-group">
             <label for="customer_account"  class="form-label">アカウント名</label>
-            <input type="text" class="form-control" id="customer_account" name="customer_account" value="{{ customer.customer_account }}" readonly>
+            <input type="text" class="form-control" id="customer_account" name="customer_account" value="{{req['customer_account']}}" readonly>
         </div>
 
         <div class="form-group">
-            <input type="hidden" class="form-control" id="customer_password" name="customer_password" value="{{ customer.customer_password }}" readonly>
+            <label for="customer_password">パスワード</label>
+            <input type="password" class="form-control" id="customer_password" name="customer_password" value="{{req['customer_password']}}" readonly>
         </div>
 
         <div class="form-group">
             <label for="customer_name"  class="form-label">会員名</label>
-            <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ customer.customer_name }}" readonly>
+            <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{req['customer_name']}}" readonly>
         </div>
 
         <div class="form-group">
             <label for="customer_zipcode"  class="form-label">郵便番号</label>
-            <input type="text" class="form-control" id="customer_zipcode" name="customer_zipcode" value="{{ customer.customer_zipcode }}" readonly>
+            <input type="text" class="form-control" id="customer_zipcode" name="customer_zipcode" value="{{req['customer_zipcode']}}" readonly>
         </div>
 
         <div class="form-group">
             <label for="customer_address"  class="form-label">住所</label>
-            <input type="text" class="form-control" id="customer_address" name="customer_address" value="{{ customer.customer_address }}" readonly>
+            <input type="text" class="form-control" id="customer_address" name="customer_address" value="{{req['customer_address']}}" readonly>
         </div>
 
         <div class="form-group">
             <label for="customer_phone"  class="form-label">電話番号</label>
-            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ customer.customer_phone }}" readonly>
+            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{req['customer_phone']}}" readonly>
         </div>
         
 

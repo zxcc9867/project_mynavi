@@ -18,7 +18,13 @@
         
         <!-- パスワード -->
         <div class="form-group">
-            <input type="hidden" class="form-control" id="customer_password" name="customer_password" value="{{ customer.customer_password }}" >
+            <label for="custoer_password" class="form-label">パスワード</label>
+            <input type="password" class="form-control" id="customer_password" name="customer_password">
+        </div>
+
+        <div class="form-group">
+            <label for="custoer_password_confirm" class="form-label">パスワード(確認用)</label>
+            <input type="password" class="form-control" id="customer_password_confirm" name="customer_password_confirm" placeholder="入力したパスワードと同一のもの">
         </div>
 
         <div class="form-group">
@@ -27,8 +33,8 @@
         </div>
 
         <div class="form-group">
-            <label for="customer_zipcode"  class="form-label">郵便番号</label>
-            <input type="text" class="form-control" id="customer_zipcode" name="customer_zipcode" value="{{ customer.customer_zipcode }}">
+            <label for="customer_zipcode"  class="form-label">郵便番号(ハイフン無し・半角数字7桁)</label>
+            <input type="text" class="form-control" id="customer_zipcode" name="customer_zipcode" inputmode="numeric" value="{{ customer.customer_zipcode }}" pattern="[0-9]{7}">
         </div>
 
         <div class="form-group">
@@ -37,8 +43,8 @@
         </div>
 
         <div class="form-group">
-            <label for="customer_phone"  class="form-label">電話番号</label>
-            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ customer.customer_phone }}">
+            <label for="customer_phone"  class="form-label">電話番号(ハイフン不要・半角数字・固定電話の場合市外局番から)</label>
+            <input type="tel" class="form-control" id="customer_phone" name="customer_phone" inputmode="numeric" value="{{ customer.customer_phone }}" pattern="[0-9]{10,11}">
         </div>
         
 
