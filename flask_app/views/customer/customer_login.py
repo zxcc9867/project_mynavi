@@ -58,7 +58,7 @@ def customer_login():
             session['logged_in_customer_id'] = customer.customer_id
             session['logged_in_customer_name'] = customer.customer_name
             flash('ログインしました')
-            if not session['event_id']:
+            if not session.get('event_id'):
                 return redirect(url_for('show_customer_event_list'))
             else:
                 return redirect(url_for('show_customer_reservation', event_id=session['event_id']))
