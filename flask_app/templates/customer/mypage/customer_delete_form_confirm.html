@@ -7,7 +7,6 @@
     <p class="font-weight-bold">会員情報削除後、削除した会員情報は復旧できません。本当によろしいですか？</p>
     <form action="{{ url_for('customer_info_overwrite', mode=mode) }}" method="post">
 
-    <p>会員情報削除後、削除した会員情報は復旧できません。本当によろしいですか？</p>
         
         <div class="form-group">
             <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{ customer.customer_id }}" readonly>
