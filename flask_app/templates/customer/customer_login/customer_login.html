@@ -1,20 +1,23 @@
 {% extends "layout_customer.html" %}
 {% block body %}
-
-<form action="{{url_for('customer_login')}}" method="post">
-    <div class="form-group">
-        <label class="form-label" for="customer_account">アカウント名：</label>
-        <input class="form-control" id="customer_account" name="customer_account" type="text"> 
+<main>
+    <div class="container base_pattern">
+        <form action="{{url_for('customer_login')}}" method="post">
+            <div class="form-group">
+                <label class="form-label" for="customer_account">アカウント名：</label>
+                <input class="form-control" id="customer_account" name="customer_account" type="text"> 
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="customer_password">パスワード：</label>
+                <input class="form-control" id="customer_password" name="customer_password" type="password"> 
+            </div>
+        
+            <button class="btn btn-primary" type="submit">ログイン</button> 
+            <a href="{{url_for('show_signup')}}" style="margin-left: 10px;">新規登録はこちら</a>
+        </form>
+        
     </div>
-
-    <div class="form-group">
-        <label class="form-label" for="customer_password">パスワード：</label>
-        <input class="form-control" id="customer_password" name="customer_password" type="password"> 
-    </div>
-
-    <button class="btn btn-primary" type="submit">ログイン</button> 
-</form>
-
-<a href="{{url_for('show_signup')}}">アカウント登録はこちら</a>
+</main>
 
 {% endblock %}
