@@ -22,9 +22,12 @@ def show_mypage():
         current_ticket_id = current_ticket_reservation.ticket_id
         current_event_id = read_ticket_one(current_ticket_id).event_id
         current_reserved_event= read_event_one(current_event_id)
-        current_reserved_events.append(current_reserved_event)
-        print(current_reserved_event)
-    return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_ticket_reservations=current_ticket_reservations, current_reserved_events=current_reserved_events)
+        current_reservation_id = current_ticket_reservation.reservation_id
+        current_reservation_info = (current_reserved_event, current_reservation_id)
+        current_reserved_events.append(current_reservation_info)
+        print(current_reservation_id)
+        print(current_reservation_info)
+    return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_reserved_events=current_reserved_events)
 
 @app.route("/mypage/customer_info/<string:mode>", methods=['GET', 'POST'])
 @is_customer_login

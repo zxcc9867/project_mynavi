@@ -8,6 +8,7 @@
                 ><a> 削除確認</a>
             </p>
         </nav>
+        <h3>以下の内容を削除しますがよろしいですか？</h3>
         <div class="base_pattern">
             <h1 id="main_title">{{event.event_name}}</h1>
             <p>開催日：{{event.event_date}}</p>
@@ -15,7 +16,7 @@
             <p>概要：<br>{{event.event_overview}}</p>
         
             <a href="{{ url_for('show_mypage') }}" class="btn btn-secondary">マイページへ</a>
-            <a href="" class="btn btn-danger">キャンセルする</a>
+            <a href="{{ url_for('delete_reservation_ticket', current_reservation_id=current_reservation_id)}}" class="btn btn-danger">キャンセルする</a>
         </div>
     </div>
 
