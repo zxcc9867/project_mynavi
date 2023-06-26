@@ -39,7 +39,6 @@
 				<p>
 					{% if not session.logged_in_customer %}
 					ゲストさん
-					{# elif session.logged_in_staff_account #}
 					{% elif session.logged_in_customer_account %}
 					{{ session.logged_in_customer_name }}さん
 					{% endif %}
