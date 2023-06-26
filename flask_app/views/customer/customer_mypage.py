@@ -20,14 +20,14 @@ def show_mypage():
     current_customer_id = session['logged_in_customer_id']
     current_customer = read_customer_one(current_customer_id)
     current_ticket_reservations = read_reservation_customer_id(current_customer_id)
-    current_reserved_event_names = []
+    current_reserved_events = []
     for current_ticket_reservation in current_ticket_reservations:
         current_ticket_id = current_ticket_reservation.ticket_id
         current_event_id = read_ticket_one(current_ticket_id).event_id
-        current_reserved_event_name = read_event_one(current_event_id).event_name
-        current_reserved_event_names.append(current_reserved_event_name)
-        print(current_reserved_event_name)
-    return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_ticket_reservations=current_ticket_reservations, current_reserved_event_names=current_reserved_event_names)
+        current_reserved_event= read_event_one(current_event_id)
+        current_reserved_events.append(current_reserved_event)
+        print(current_reserved_event)
+    return render_template('/customer/mypage/mypage_top.html', current_customer=current_customer, current_ticket_reservations=current_ticket_reservations, current_reserved_events=current_reserved_events)
 
 @app.route("/mypage/customer_info/<string:mode>", methods=['GET', 'POST'])
 @is_customer_login

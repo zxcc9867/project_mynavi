@@ -1,7 +1,7 @@
 {% extends "layout_customer.html" %}
 {% block body %}
-<main>
-    <div id="list_area" class="base_pattern">
+    <main>
+      <div class="container">
         <div style="display: flex;">
             <h1 id="main_title">
               マイページ
@@ -22,7 +22,7 @@
                       変更する
                     </a>
 
-                    <a href="{{url_for('show_customer_info_form', mode='delete')}}" class="btn btn-primary">
+                    <a href="{{url_for('show_customer_info_form', mode='delete')}}" class="btn btn-danger">
                       退会する
                     </a>
                 </div>
@@ -44,13 +44,16 @@
                             <th class="event_name">イベント名</th>
                             <th class="action_button"></th>
                           </tr>
-                          {% for current_reserved_event_name in current_reserved_event_names %}
+                          {% for current_reserved_event in current_reserved_events %}
                           <tr>
                             <form method="post">
-                              <td class="event_name">{{current_reserved_event_name.event_name}}</td>
+                              <td class="event_name">{{current_reserved_event.event_name}}</td>
                                 <td class="action_button">
                                   <div>
-                                    <a href="#" class="btn btn-danger" style="margin: 0 auto;">キャンセルする</a>
+
+                                   
+                                    <a href="{{url_for('show_customer_ticket_delete_confirm', event_id=current_reserved_event.event_id)}}" class="btn btn-danger">キャンセルする</a>
+
                                   </div>
                                 </td>
                               </form>
@@ -65,7 +68,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</main>
-
+      </div>
+    </main>
 {% endblock %}
