@@ -7,30 +7,32 @@
     </h1>
     <h2 id="main_sub_title">会員情報</h2>
 
-    <form method="post" action="{{url_for('show_signup_confirm')}}">
-      <div class="form-group">
-        <label>アカウント名：</label>
-        <input class="form-control" name="customer_account" type="email">
-
-        <label>パスワード<span class="required">（必須）</span>：</label>
-        <input class="form-control" name="customer_password" type="password">
-
-        <label>会員名<span class="required">（必須）</span>：</label>
-        <input class="form-control" name="customer_name" type="text">
-
-        <label>郵便番号</label>
-        <input class="form-control" name="customer_zipcode" type="tel">
-
-        <label>住所</label>
-        <input class="form-control" name="customer_address" type="text">
-
-        <label>電話番号：</label>
-        <input class="form-control" name="customer_phone" type="tel">
-      </div>
-
-      <button type="submit" class="btn btn-primary" style="margin-bottom:100px;">確認画面へ</button>
-
-    </form>
+    <div class="base_pattern">
+      <form method="post" action="{{url_for('show_signup_confirm')}}">
+        <div class="form-group">
+          <label>アカウント名：</label>
+          <input class="form-control" name="customer_account" type="email">
+  
+          <label>パスワード<span class="required">（必須）</span>：</label>
+          <input class="form-control" name="customer_password" type="password">
+  
+          <label>会員名<span class="required">（必須）</span>：</label>
+          <input class="form-control" name="customer_name" type="text">
+  
+          <label>郵便番号</label>
+          <input class="form-control" name="customer_zipcode" type="tel">
+  
+          <label>住所</label>
+          <input class="form-control" name="customer_address" type="text">
+  
+          <label>電話番号：</label>
+          <input class="form-control" name="customer_phone" type="tel">
+        </div>
+  
+        <button type="submit" class="btn btn-primary">確認画面へ</button>
+  
+      </form>
+    </div>
   </div>
 
 {% endblock %}
